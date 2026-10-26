@@ -1,0 +1,89 @@
+[
+    {
+      "name": "theme_info",
+      "theme_name": "Vijay Traders OS 2.0",
+      "theme_version": "1.0.0",
+      "theme_author": "Zefura",
+      "theme_documentation_url": "https://shopify.dev/themes",
+      "theme_support_url": "https://shopify.dev/themes"
+    },
+    {
+      "name": "Brand Colors",
+      "settings": [
+        {
+          "type": "color",
+          "id": "color_primary_red",
+          "label": "Primary Red",
+          "default": "#C62828"
+        },
+        {
+          "type": "color",
+          "id": "color_secondary_red",
+          "label": "Secondary Red (Hover/Accent)",
+          "default": "#E53935"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "Neutral Text",
+          "default": "#222222"
+        }
+      ]
+    },
+    {
+      "name": "Contact & WhatsApp Integration",
+      "settings": [
+        {
+          "type": "text",
+          "id": "contact_phone_display",
+          "label": "Display Phone Number",
+          "default": "+94 11 234 5678 (Placeholder)"
+        },
+        {
+          "type": "text",
+          "id": "contact_phone_tel",
+          "label": "Telephone Link Format (e.g. +94112345678)",
+          "default": "+94112345678"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_number",
+          "label": "WhatsApp Number (International format, no + or spaces)",
+          "default": "94112345678",
+          "info": "Used to generate https://wa.me/ links in the Footer and Cart page."
+        },
+        {
+          "type": "textarea",
+          "id": "store_address",
+          "label": "Store Address",
+          "default": "Store Address Placeholder, Colombo, Sri Lanka"
+        },
+        {
+          "type": "text",
+          "id": "store_hours",
+          "label": "Operating Hours",
+          "default": "Mon – Sat: 9:00 AM – 7:00 PM"
+        }
+      ]
+    },
+    {
+      "name": "Social Media Links",
+      "settings": [
+        {
+          "type": "url",
+          "id": "social_facebook_link",
+          "label": "Facebook URL"
+        },
+        {
+          "type": "url",
+          "id": "social_instagram_link",
+          "label": "Instagram URL"
+        },
+        {
+          "type": "url",
+          "id": "social_tiktok_link",
+          "label": "TikTok URL"
+        }
+      ]
+    }
+  ]

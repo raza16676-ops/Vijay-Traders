@@ -1,0 +1,201 @@
+{%- assign display_limit = section.settings.brands_display_limit | default: 25 -%}
+
+<section
+  class="py-12 sm:py-16 bg-[#FAF8F8] border-y border-[#EAE4E4]"
+  aria-labelledby="BrandsHeading-{{ section.id }}"
+  id="BrandsSection-{{ section.id }}"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">
+          {{ section.settings.eyebrow | escape }}
+        </span>
+        <h2 id="BrandsHeading-{{ section.id }}" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+          {{ section.settings.heading | escape }}
+        </h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="text-xs sm:text-sm text-neutral-600 mt-1">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <!-- Interactive 25 vs 18 Brand Switcher + View All Link -->
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <span class="text-xs text-neutral-500 font-medium">Preview Capacity:</span>
+        <button
+          type="button"
+          data-brand-toggle="25"
+          class="px-3 py-1 text-xs font-semibold rounded-sm transition-colors {% if display_limit == 25 %}bg-[#C62828] text-white{% else %}bg-white border border-[#EAE4E4] text-[#222222]{% endif %}"
+        >
+          Show 25 Brands
+        </button>
+        <button
+          type="button"
+          data-brand-toggle="18"
+          class="px-3 py-1 text-xs font-semibold rounded-sm transition-colors {% if display_limit == 18 %}bg-[#C62828] text-white{% else %}bg-white border border-[#EAE4E4] text-[#222222]{% endif %}"
+        >
+          Show 18 Brands
+        </button>
+
+        {%- if section.settings.view_all_label != blank -%}
+          <a
+            href="{{ section.settings.view_all_link | default: routes.all_products_collection_url }}"
+            class="text-xs font-bold uppercase tracking-wider text-[#C62828] hover:underline ml-2"
+          >
+            {{ section.settings.view_all_label | escape }} &rarr;
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div id="BrandsGrid-{{ section.id }}" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks limit: 25 -%}
+          <a
+            href="{{ block.settings.link | default: routes.all_products_collection_url }}"
+            data-brand-index="{{ forloop.index }}"
+            class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-4 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[92px] {% if forloop.index > display_limit %}hidden{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.logo != blank -%}
+              <img
+                src="{{ block.settings.logo | image_url: width: 240 }}"
+                alt="{{ block.settings.brand_name | escape }}"
+                loading="lazy"
+                width="120"
+                height="48"
+                class="max-h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              >
+            {%- else -%}
+              <span class="font-editorial text-lg font-bold text-[#222222] group-hover:text-[#C62828] tracking-wider">
+                BP{{ forloop.index | prepend: '0' | slice: -2, 2 }}
+              </span>
+              <span class="text-[11px] text-neutral-500 mt-1 font-medium truncate max-w-full">
+                {{ block.settings.brand_name | escape }}
+              </span>
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Default 25 Replaceable Placeholders matching prototype {%- endcomment -%}
+        {%- for i in (1..25) -%}
+          {%- assign num_padded = i | prepend: '0' | slice: -2, 2 -%}
+          <a
+            href="{{ routes.all_products_collection_url }}"
+            data-brand-index="{{ i }}"
+            class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-4 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[92px] {% if i > display_limit %}hidden{% endif %}"
+          >
+            <span class="font-editorial text-lg font-bold text-[#222222] group-hover:text-[#C62828] tracking-wider">
+              BP{{ num_padded }}
+            </span>
+            <span class="text-[11px] text-neutral-500 mt-1 font-medium truncate max-w-full">
+              Brand Placeholder {{ num_padded }}
+            </span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const root = document.getElementById('BrandsSection-{{ section.id }}');
+      if (!root) return;
+      const cards = root.querySelectorAll('[data-brand-index]');
+      const btns = root.querySelectorAll('[data-brand-toggle]');
+
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const limit = parseInt(btn.getAttribute('data-brand-toggle'), 10);
+          cards.forEach((card) => {
+            const idx = parseInt(card.getAttribute('data-brand-index'), 10);
+            card.classList.toggle('hidden', idx > limit);
+          });
+          btns.forEach((b) => {
+            const active = b === btn;
+            b.className = 'px-3 py-1 text-xs font-semibold rounded-sm transition-colors ' +
+              (active ? 'bg-[#C62828] text-white' : 'bg-white border border-[#EAE4E4] text-[#222222]');
+          });
+        });
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Brands Showcase",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Official Retail Directory"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Brand"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Replaceable brand placeholders configured for up to 25 partner brands."
+    },
+    {
+      "type": "range",
+      "id": "brands_display_limit",
+      "min": 6,
+      "max": 30,
+      "step": 1,
+      "label": "Default Brands Count",
+      "default": 25
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Link Text",
+      "default": "View All Brands"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "Brands Directory Page Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand Slot",
+      "settings": [
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "Brand Placeholder"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Brand Logo Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Brand Collection Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brands Showcase"
+    }
+  ]
+}
+{% endschema %}

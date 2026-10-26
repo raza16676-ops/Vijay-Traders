@@ -1,0 +1,285 @@
+{%- liquid
+  assign tel_href = 'tel:' | append: settings.contact_phone_tel
+  assign wa_href = 'https://wa.me/' | append: settings.whatsapp_number
+  assign shop_menu = linklists[section.settings.shop_menu]
+  assign support_menu = linklists[section.settings.support_menu]
+-%}
+
+{%- if section.settings.show_social_banner -%}
+  <!-- Section H: Social Media Community Bar -->
+  <section class="bg-[#FAF8F8] border-t border-[#EAE4E4] py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto text-center">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">
+        {{ section.settings.social_eyebrow | escape }}
+      </span>
+      <h2 class="font-editorial text-2xl sm:text-3xl font-semibold text-[#222222] mt-1">
+        {{ section.settings.social_heading | escape }}
+      </h2>
+      <p class="text-sm text-neutral-600 mt-2 max-w-xl mx-auto">
+        {{ section.settings.social_subtext | escape }}
+      </p>
+
+      <div class="mt-6 flex items-center justify-center gap-4 sm:gap-6 flex-wrap">
+        {%- if settings.social_facebook_link != blank -%}
+          <a
+            href="{{ settings.social_facebook_link }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow {{ shop.name }} on Facebook"
+            class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-white border border-[#EAE4E4] hover:border-[#C62828] text-[#222222] hover:text-[#C62828] rounded-sm text-xs sm:text-sm font-semibold transition-colors"
+          >
+            <span>Facebook</span>
+          </a>
+        {%- endif -%}
+
+        {%- if settings.social_instagram_link != blank -%}
+          <a
+            href="{{ settings.social_instagram_link }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow {{ shop.name }} on Instagram"
+            class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-white border border-[#EAE4E4] hover:border-[#C62828] text-[#222222] hover:text-[#C62828] rounded-sm text-xs sm:text-sm font-semibold transition-colors"
+          >
+            <span>Instagram</span>
+          </a>
+        {%- endif -%}
+
+        {%- if settings.social_tiktok_link != blank -%}
+          <a
+            href="{{ settings.social_tiktok_link }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow {{ shop.name }} on TikTok"
+            class="inline-flex items-center gap-2.5 px-5 py-2.5 bg-white border border-[#EAE4E4] hover:border-[#C62828] text-[#222222] hover:text-[#C62828] rounded-sm text-xs sm:text-sm font-semibold transition-colors"
+          >
+            <span>TikTok</span>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+<!-- Section I: Global Footer -->
+<footer class="bg-white border-t border-[#EAE4E4] text-[#222222]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
+
+      <!-- Column 1: Brand Identity & Direct Contact -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="{{ routes.root_url }}" class="inline-block">
+          <span class="font-editorial text-2xl font-bold tracking-tight text-[#222222]">
+            VIJAY <span class="text-[#C62828]">TRADERS</span>
+          </span>
+        </a>
+        <p class="text-sm text-neutral-600 leading-relaxed max-w-sm">
+          {{ section.settings.brand_description | escape }}
+        </p>
+
+        <div class="pt-2 space-y-2 text-xs sm:text-sm text-neutral-700">
+          {%- if settings.store_address != blank -%}
+            <p><strong>Address:</strong> {{ settings.store_address | escape }}</p>
+          {%- endif -%}
+          {%- if settings.store_hours != blank -%}
+            <p><strong>Hours:</strong> {{ settings.store_hours | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="pt-2 flex flex-wrap gap-3">
+          {%- if settings.contact_phone_tel != blank -%}
+            <a
+              href="{{ tel_href }}"
+              class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider border border-[#222222] text-[#222222] hover:border-[#C62828] hover:text-[#C62828] rounded-sm transition-colors"
+            >
+              <span>Call Us Now</span>
+            </a>
+          {%- endif -%}
+
+          {%- if settings.whatsapp_number != blank -%}
+            <a
+              href="{{ wa_href }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider bg-[#C62828] text-white hover:bg-[#E53935] rounded-sm transition-colors"
+            >
+              <span>Chat on WhatsApp</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Column 2: Shop Categories Menu -->
+      <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-[#C62828] mb-4">
+          {{ section.settings.shop_menu_heading | escape }}
+        </h3>
+        <ul class="space-y-2.5 text-sm text-neutral-600">
+          {%- for link in shop_menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-[#C62828] transition-colors">
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- else -%}
+            <li><a href="/collections/women" class="hover:text-[#C62828]">Women's Beauty</a></li>
+            <li><a href="/collections/men" class="hover:text-[#C62828]">Men's Grooming</a></li>
+            <li><a href="/collections/make-up" class="hover:text-[#C62828]">Make-up Essentials</a></li>
+            <li><a href="/collections/sun-protection" class="hover:text-[#C62828]">Sun Protection</a></li>
+            <li><a href="/collections/mother-baby" class="hover:text-[#C62828]">Mother &amp; Baby</a></li>
+            <li><a href="/collections/combo-deals" class="font-semibold text-[#C62828]">Combo Deals</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <!-- Column 3: Customer Care & Policies Menu -->
+      <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-[#C62828] mb-4">
+          {{ section.settings.support_menu_heading | escape }}
+        </h3>
+        <ul class="space-y-2.5 text-sm text-neutral-600">
+          {%- for link in support_menu.links -%}
+            <li>
+              <a href="{{ link.url }}" class="hover:text-[#C62828] transition-colors">
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {%- else -%}
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <a href="{{ policy.url }}" class="hover:text-[#C62828] transition-colors">
+                    {{ policy.title | escape }}
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <!-- Column 4: Native Shopify Customer Newsletter Form -->
+      <div>
+        <h3 class="text-xs font-bold uppercase tracking-widest text-[#C62828] mb-4">
+          {{ section.settings.newsletter_heading | escape }}
+        </h3>
+        <p class="text-xs text-neutral-600 leading-relaxed mb-3">
+          {{ section.settings.newsletter_subtext | escape }}
+        </p>
+
+        {%- form 'customer', id: 'FooterNewsletterForm', class: 'space-y-2' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label for="FooterEmail-{{ section.id }}" class="sr-only">Email address</label>
+          <input
+            type="email"
+            name="contact[email]"
+            id="FooterEmail-{{ section.id }}"
+            value="{{ form.email }}"
+            required
+            placeholder="Enter your email"
+            class="w-full px-3 py-2 text-sm border border-[#EAE4E4] rounded-sm focus:outline-none focus:border-[#C62828]"
+          >
+          <button
+            type="submit"
+            class="w-full py-2 px-4 bg-[#222222] hover:bg-[#C62828] text-white text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors"
+          >
+            Subscribe
+          </button>
+
+          {%- if form.posted_successfully? -%}
+            <p class="text-xs text-[#C62828] font-medium pt-1">Thank you for subscribing!</p>
+          {%- elsif form.errors -%}
+            <p class="text-xs text-[#E53935] pt-1">{{ form.errors | default_errors }}</p>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-[#EAE4E4] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        {%- if settings.social_facebook_link != blank -%}
+          <a href="{{ settings.social_facebook_link }}" target="_blank" rel="noopener noreferrer" class="hover:text-[#C62828]">Facebook</a>
+        {%- endif -%}
+        {%- if settings.social_instagram_link != blank -%}
+          <a href="{{ settings.social_instagram_link }}" target="_blank" rel="noopener noreferrer" class="hover:text-[#C62828]">Instagram</a>
+        {%- endif -%}
+        {%- if settings.social_tiktok_link != blank -%}
+          <a href="{{ settings.social_tiktok_link }}" target="_blank" rel="noopener noreferrer" class="hover:text-[#C62828]">TikTok</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_social_banner",
+      "label": "Show Social Media Community Bar above Footer",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "social_eyebrow",
+      "label": "Social Banner Eyebrow",
+      "default": "Connect With Us"
+    },
+    {
+      "type": "text",
+      "id": "social_heading",
+      "label": "Social Banner Heading",
+      "default": "Follow Vijay Traders on Social Media"
+    },
+    {
+      "type": "textarea",
+      "id": "social_subtext",
+      "label": "Social Banner Description",
+      "default": "Stay updated on new beauty arrivals, routine guides, and seasonal combo promotions across our official channels."
+    },
+    {
+      "type": "textarea",
+      "id": "brand_description",
+      "label": "Footer Brand Description",
+      "default": "Vijay Traders is your trusted destination for authentic skincare, cosmetics, sun protection, and family care essentials."
+    },
+    {
+      "type": "text",
+      "id": "shop_menu_heading",
+      "label": "Shop Column Heading",
+      "default": "Shop Categories"
+    },
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop Categories Menu"
+    },
+    {
+      "type": "text",
+      "id": "support_menu_heading",
+      "label": "Support Column Heading",
+      "default": "Customer Support"
+    },
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Customer Support Menu"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "Beauty Dispatch"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_subtext",
+      "label": "Newsletter Subtext",
+      "default": "Subscribe for new product launches and curated bundle offers."
+    }
+  ]
+}
+{% endschema %}

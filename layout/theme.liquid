@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    {{ content_for_header }}
+
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Play CDN + Compiled Theme CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+    <style>
+      :root {
+        --color-primary-red: #C62828;
+        --color-secondary-red: #E53935;
+        --color-white: #FFFFFF;
+        --color-neutral-text: #222222;
+        --color-subtle-bg: #FAF8F8;
+        --color-muted-border: #EAE4E4;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        color: #222222;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+
+      .font-editorial {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+      }
+
+      :focus-visible {
+        outline: 2px solid #C62828;
+        outline-offset: 2px;
+      }
+
+      /* Smooth Accordion Transitions for Product Detail Page */
+      .accordion-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 280ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .accordion-content[aria-hidden="false"] {
+        grid-template-rows: 1fr;
+      }
+
+      .accordion-inner {
+        overflow: hidden;
+      }
+
+      /* Product Card Image Hover Zoom */
+      .product-card-img {
+        transition: transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .group:hover .product-card-img {
+        transform: scale(1.04);
+      }
+
+      /* Reduced Motion Compliance */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .group:hover .product-card-img {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-white text-[#222222] antialiased selection:bg-[#C62828] selection:text-white flex flex-col min-h-screen">
+    <a class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-[#C62828] focus:text-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold" href="#MainContent">
+      {{ 'general.accessibility.skip_to_text' | t }}
+    </a>
+
+    {% section 'announcement-bar' %}
+    {% section 'header' %}
+
+    <main id="MainContent" class="flex-1 focus:outline-none" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+  </body>
+</html>

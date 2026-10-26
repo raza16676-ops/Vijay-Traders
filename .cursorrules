@@ -1,0 +1,22 @@
+# Vijay Traders — Cosmetics Storefront Cursor Rules
+
+## Tech Stack Constraints
+- Use strictly semantic HTML5, Tailwind CSS utility classes, and modular Vanilla JavaScript (ES6 modules).
+- NEVER introduce React, Next.js, Vue, Alpine, jQuery, or Bootstrap.
+- Keep components modular in `src/js/components.js` and data centralized in `src/data/store-data.js` so they map cleanly to Shopify Online Store 2.0 sections, snippets, and templates.
+
+## Design System & Brand Identity
+- Strictly enforce the two-color red-and-white visual identity:
+  - Primary Red: `#C62828`
+  - Secondary Red (hover/active accents): `#E53935`
+  - White: `#FFFFFF`
+  - Neutral Text: `#222222`
+  - Subtle Background: `#FAF8F8`
+  - Muted Borders: `#EAE4E4`
+- Do NOT introduce unrelated accent colors (no greens, blues, purples, or amber badges).
+- Headings use `.font-editorial` (`Cormorant Garamond`); body/UI uses `Plus Jakarta Sans`.
+
+## Layout & UX Rules
+- Mobile product grids and mobile category grids MUST maintain a 2-column layout (`grid-cols-2`).
+- Maintain keyboard accessibility (`aria-expanded`, `aria-hidden`, visible `:focus-visible` states) and respect `prefers-reduced-motion`.
+- Keep unverified business data (phone `+94112345678`, WhatsApp `https://wa.me/94112345678`, 18 vs 25 brand count, and subcategory names for Women, Men, and Make-up) clearly configurable and labeled as placeholders until verified by Vijay Traders.

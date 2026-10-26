@@ -1,0 +1,116 @@
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16" aria-label="{{ section.settings.heading | escape }}">
+  <div class="relative rounded-sm overflow-hidden bg-[#222222] text-white border border-[#EAE4E4]">
+    <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+      <div class="lg:col-span-7 p-8 sm:p-12 lg:p-16 space-y-4">
+        {%- if section.settings.badge != blank -%}
+          <span class="inline-block bg-[#C62828] text-white text-[11px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-sm">
+            {{ section.settings.badge | escape }}
+          </span>
+        {%- endif -%}
+
+        <h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+          {{ section.settings.heading | escape }}
+        </h2>
+
+        {%- if section.settings.text != blank -%}
+          <p class="text-sm sm:text-base text-neutral-300 max-w-xl leading-relaxed">
+            {{ section.settings.text | escape }}
+          </p>
+        {%- endif -%}
+
+        <div class="pt-3 flex flex-wrap gap-4">
+          {%- if section.settings.primary_btn_label != blank -%}
+            <a
+              href="{{ section.settings.primary_btn_link | default: routes.all_products_collection_url }}"
+              class="px-7 py-3.5 bg-[#C62828] hover:bg-[#E53935] text-white text-xs sm:text-sm font-semibold uppercase tracking-widest rounded-sm transition-colors"
+            >
+              {{ section.settings.primary_btn_label | escape }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.secondary_btn_label != blank -%}
+            <a
+              href="{{ section.settings.secondary_btn_link | default: routes.all_products_collection_url }}"
+              class="px-7 py-3.5 bg-transparent border border-white/40 hover:border-white text-white text-xs sm:text-sm font-semibold uppercase tracking-widest rounded-sm transition-colors"
+            >
+              {{ section.settings.secondary_btn_label | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 h-64 sm:h-80 lg:h-full bg-neutral-800">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1000 }}"
+            alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+            loading="lazy"
+            width="800"
+            height="600"
+            class="w-full h-full object-cover"
+          >
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover text-neutral-500' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Promotional Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Campaign Badge",
+      "default": "Daily UV Defense Campaign"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Protect Your Skin Barrier Every Single Morning"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Discover lightweight, invisible-finish SPF 50+ sunscreens and soothing after-sun care curated for year-round tropical sunshine."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Campaign Image"
+    },
+    {
+      "type": "text",
+      "id": "primary_btn_label",
+      "label": "Primary Button Label",
+      "default": "Shop Sun Protection"
+    },
+    {
+      "type": "url",
+      "id": "primary_btn_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Secondary Button Label",
+      "default": "Explore Mother & Baby"
+    },
+    {
+      "type": "url",
+      "id": "secondary_btn_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promotional Banner"
+    }
+  ]
+}
+{% endschema %}

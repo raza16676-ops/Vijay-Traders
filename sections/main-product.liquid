@@ -1,0 +1,419 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_discount = false
+  if current_variant.compare_at_price > current_variant.price
+    assign has_discount = true
+  endif
+-%}
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-12 pb-24 sm:pb-12" data-section-id="{{ section.id }}">
+  <!-- Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="text-xs text-neutral-500 mb-6">
+    <ol class="flex items-center space-x-2 flex-wrap">
+      <li><a href="{{ routes.root_url }}" class="hover:text-[#C62828]">Home</a></li>
+      <li><span>/</span></li>
+      {%- if collection -%}
+        <li><a href="{{ collection.url }}" class="hover:text-[#C62828]">{{ collection.title }}</a></li>
+        <li><span>/</span></li>
+      {%- elsif product.collections.first -%}
+        <li><a href="{{ product.collections.first.url }}" class="hover:text-[#C62828]">{{ product.collections.first.title }}</a></li>
+        <li><span>/</span></li>
+      {%- endif -%}
+      <li class="text-[#222222] font-semibold truncate max-w-xs" aria-current="page">{{ product.title }}</li>
+    </ol>
+  </nav>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+    <!-- Left Column: Product Media Gallery -->
+    <div class="lg:col-span-6 space-y-4">
+      <div class="aspect-[4/5] bg-[#FAF8F8] border border-[#EAE4E4] rounded-sm overflow-hidden relative">
+        {%- if product.featured_media -%}
+          <img
+            id="PdpMainImage-{{ section.id }}"
+            src="{{ current_variant.featured_media | default: product.featured_media | image_url: width: 1000 }}"
+            alt="{{ product.featured_media.alt | default: product.title | escape }}"
+            width="800"
+            height="1000"
+            fetchpriority="high"
+            class="w-full h-full object-cover object-center transition-opacity duration-200"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover text-neutral-300' }}
+        {%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <div class="grid grid-cols-4 sm:grid-cols-5 gap-3" role="list" aria-label="Product image thumbnails">
+          {%- for media in product.media -%}
+            <button
+              type="button"
+              data-pdp-thumb="{{ media | image_url: width: 1000 }}"
+              class="aspect-square rounded-sm overflow-hidden border-2 transition-colors {% if forloop.first %}border-[#C62828]{% else %}border-[#EAE4E4] hover:border-neutral-400{% endif %}"
+              aria-label="View image {{ forloop.index }}"
+            >
+              <img
+                src="{{ media.preview_image | image_url: width: 240 }}"
+                alt="{{ media.alt | default: product.title | escape }}"
+                loading="lazy"
+                width="160"
+                height="160"
+                class="w-full h-full object-cover"
+              >
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: Product Details, Variant Form & Interactive Accordions -->
+    <div class="lg:col-span-6 space-y-6">
+      <div class="border-b border-[#EAE4E4] pb-5">
+        <div class="flex items-center justify-between gap-2">
+          {%- if product.vendor != blank -%}
+            <a
+              href="{{ product.vendor | url_for_vendor }}"
+              class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828] hover:underline"
+            >
+              {{ product.vendor }}
+            </a>
+          {%- endif -%}
+
+          <span id="PdpSku-{{ section.id }}" class="text-xs text-neutral-400 {% if current_variant.sku == blank %}hidden{% endif %}">
+            SKU: {{ current_variant.sku }}
+          </span>
+        </div>
+
+        <h1 class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-2 leading-tight">
+          {{ product.title }}
+        </h1>
+
+        <div class="mt-4 flex items-baseline gap-3 flex-wrap">
+          <span id="PdpPrice-{{ section.id }}" class="text-2xl font-bold text-[#C62828]">
+            {{ current_variant.price | money }}
+          </span>
+          <span
+            id="PdpComparePrice-{{ section.id }}"
+            class="text-sm text-neutral-400 line-through {% unless has_discount %}hidden{% endunless %}"
+          >
+            {{ current_variant.compare_at_price | money }}
+          </span>
+
+          <span
+            id="PdpStockBadge-{{ section.id }}"
+            class="ml-auto text-xs font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-sm {% if current_variant.available %}bg-[#FAF8F8] text-[#222222] border border-[#EAE4E4]{% else %}bg-neutral-200 text-neutral-600{% endif %}"
+          >
+            {%- if current_variant.available -%}In Stock{%- else -%}Out of Stock{%- endif -%}
+          </span>
+        </div>
+
+        {%- if product.metafields.custom.short_description != blank -%}
+          <p class="mt-4 text-sm text-neutral-600 leading-relaxed">
+            {{ product.metafields.custom.short_description | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      {%- form 'product', product, id: 'ProductForm', class: 'space-y-6' -%}
+        <input type="hidden" name="id" id="PdpVariantId-{{ section.id }}" value="{{ current_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          <div>
+            <label for="PdpVariantSelect-{{ section.id }}" class="block text-xs font-bold uppercase tracking-widest text-[#222222] mb-2.5">
+              Select Option / Shade / Size
+            </label>
+            <div class="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Product Variants">
+              {%- for variant in product.variants -%}
+                <button
+                  type="button"
+                  data-variant-btn="{{ variant.id }}"
+                  data-price="{{ variant.price | money }}"
+                  data-compare="{{ variant.compare_at_price | money }}"
+                  data-has-discount="{% if variant.compare_at_price > variant.price %}true{% else %}false{% endif %}"
+                  data-sku="{{ variant.sku | escape }}"
+                  data-available="{{ variant.available }}"
+                  {% if variant.featured_media %}data-image="{{ variant.featured_media | image_url: width: 1000 }}"{% endif %}
+                  aria-pressed="{% if variant.id == current_variant.id %}true{% else %}false{% endif %}"
+                  class="px-4 py-2 text-xs font-semibold rounded-sm border transition-colors {% if variant.id == current_variant.id %}border-[#C62828] bg-[#C62828] text-white{% else %}border-[#EAE4E4] bg-white text-[#222222] hover:border-[#C62828]{% endif %} {% unless variant.available %}opacity-50{% endunless %}"
+                >
+                  {{ variant.title }} {%- unless variant.available -%} (Sold Out){%- endunless -%}
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endunless -%}
+
+        <!-- Quantity & Add to Bag Row -->
+        <div class="flex items-stretch gap-3 pt-2">
+          <div class="flex items-center border border-[#EAE4E4] rounded-sm bg-white">
+            <button
+              type="button"
+              id="PdpQtyMinus-{{ section.id }}"
+              class="w-10 h-12 text-[#222222] hover:text-[#C62828] font-bold"
+              aria-label="Decrease quantity"
+            >
+              &minus;
+            </button>
+            <input
+              type="number"
+              name="quantity"
+              id="PdpQtyInput-{{ section.id }}"
+              value="1"
+              min="1"
+              max="20"
+              aria-label="Product quantity"
+              class="w-12 text-center text-sm font-semibold text-[#222222] focus:outline-none"
+            >
+            <button
+              type="button"
+              id="PdpQtyPlus-{{ section.id }}"
+              class="w-10 h-12 text-[#222222] hover:text-[#C62828] font-bold"
+              aria-label="Increase quantity"
+            >
+              &#43;
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            id="PdpSubmitBtn-{{ section.id }}"
+            {% unless current_variant.available %}disabled{% endunless %}
+            class="flex-1 bg-[#C62828] hover:bg-[#E53935] text-white text-xs sm:text-sm font-semibold uppercase tracking-widest rounded-sm transition-colors px-6 py-3.5 {% unless current_variant.available %}opacity-50 cursor-not-allowed{% endunless %}"
+          >
+            {%- if current_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        </div>
+      {%- endform -%}
+
+      <!-- Interactive Collapsible Accordions -->
+      <div class="pt-4 divide-y divide-[#EAE4E4] border-t border-b border-[#EAE4E4]">
+
+        <!-- 1. Interactive Description Accordion -->
+        <div>
+          <button
+            type="button"
+            data-pdp-acc="AccDesc-{{ section.id }}"
+            aria-expanded="true"
+            aria-controls="AccDesc-{{ section.id }}"
+            class="w-full py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-widest text-[#222222] hover:text-[#C62828] transition-colors"
+          >
+            <span>Description</span>
+            <svg data-acc-icon class="w-4 h-4 transition-transform duration-200 rotate-180 text-[#C62828]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="AccDesc-{{ section.id }}" class="accordion-content" aria-hidden="false">
+            <div class="accordion-inner pb-4 text-sm text-neutral-600 leading-relaxed prose prose-sm max-w-none">
+              {%- if product.description != blank -%}
+                {{ product.description }}
+              {%- else -%}
+                <p>Product description will appear here once entered in Shopify Admin.</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Interactive Benefits Accordion -->
+        <div>
+          <button
+            type="button"
+            data-pdp-acc="AccBenefits-{{ section.id }}"
+            aria-expanded="true"
+            aria-controls="AccBenefits-{{ section.id }}"
+            class="w-full py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-widest text-[#222222] hover:text-[#C62828] transition-colors"
+          >
+            <span>Key Benefits</span>
+            <svg data-acc-icon class="w-4 h-4 transition-transform duration-200 rotate-180 text-[#C62828]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div id="AccBenefits-{{ section.id }}" class="accordion-content" aria-hidden="false">
+            <div class="accordion-inner pb-4 text-sm text-neutral-600 leading-relaxed">
+              {%- if product.metafields.custom.benefits.value != blank -%}
+                <ul class="space-y-2">
+                  {%- for benefit in product.metafields.custom.benefits.value -%}
+                    <li class="flex items-start gap-2">
+                      <span class="text-[#C62828] font-bold">&bull;</span>
+                      <span>{{ benefit }}</span>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- elsif section.settings.fallback_benefits != blank -%}
+                <p>{{ section.settings.fallback_benefits | escape }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Optional Ingredients Accordion (Renders when Metafield is present) -->
+        {%- if product.metafields.custom.ingredients != blank -%}
+          <div>
+            <button
+              type="button"
+              data-pdp-acc="AccIng-{{ section.id }}"
+              aria-expanded="false"
+              aria-controls="AccIng-{{ section.id }}"
+              class="w-full py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-widest text-[#222222] hover:text-[#C62828] transition-colors"
+            >
+              <span>Ingredients</span>
+              <svg data-acc-icon class="w-4 h-4 transition-transform duration-200 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="AccIng-{{ section.id }}" class="accordion-content" aria-hidden="true">
+              <div class="accordion-inner pb-4 text-sm text-neutral-600 leading-relaxed">
+                <p>{{ product.metafields.custom.ingredients | escape }}</p>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        <!-- 4. Optional How to Use Accordion (Renders when Metafield is present) -->
+        {%- if product.metafields.custom.how_to_use != blank -%}
+          <div>
+            <button
+              type="button"
+              data-pdp-acc="AccUse-{{ section.id }}"
+              aria-expanded="false"
+              aria-controls="AccUse-{{ section.id }}"
+              class="w-full py-4 flex items-center justify-between text-left text-xs font-bold uppercase tracking-widest text-[#222222] hover:text-[#C62828] transition-colors"
+            >
+              <span>How to Use</span>
+              <svg data-acc-icon class="w-4 h-4 transition-transform duration-200 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="AccUse-{{ section.id }}" class="accordion-content" aria-hidden="true">
+              <div class="accordion-inner pb-4 text-sm text-neutral-600 leading-relaxed">
+                <p>{{ product.metafields.custom.how_to_use | escape }}</p>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mobile Sticky Add to Bag Bar -->
+<div class="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#EAE4E4] p-3 z-30 flex items-center justify-between gap-3 shadow-lg">
+  <div class="truncate">
+    <p class="text-xs font-semibold text-[#222222] truncate">{{ product.title }}</p>
+    <p id="PdpStickyPrice-{{ section.id }}" class="text-sm font-bold text-[#C62828]">{{ current_variant.price | money }}</p>
+  </div>
+  <button
+    type="button"
+    id="PdpStickyBtn-{{ section.id }}"
+    {% unless current_variant.available %}disabled{% endunless %}
+    class="px-5 py-2.5 bg-[#C62828] text-white text-xs font-semibold uppercase tracking-widest rounded-sm shrink-0 {% unless current_variant.available %}opacity-50{% endunless %}"
+  >
+    {%- if current_variant.available -%}Add to Bag{%- else -%}Sold Out{%- endif -%}
+  </button>
+</div>
+
+<script>
+  (function() {
+    const sId = '{{ section.id }}';
+    const root = document.querySelector('[data-section-id="' + sId + '"]');
+    if (!root) return;
+
+    // Thumbnail Switcher
+    const mainImg = document.getElementById('PdpMainImage-' + sId);
+    root.querySelectorAll('[data-pdp-thumb]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (mainImg) mainImg.src = btn.getAttribute('data-pdp-thumb');
+        root.querySelectorAll('[data-pdp-thumb]').forEach((b) => {
+          b.classList.remove('border-[#C62828]');
+          b.classList.add('border-[#EAE4E4]');
+        });
+        btn.classList.add('border-[#C62828]');
+        btn.classList.remove('border-[#EAE4E4]');
+      });
+    });
+
+    // Variant Switcher
+    const hiddenId = document.getElementById('PdpVariantId-' + sId);
+    const priceEl = document.getElementById('PdpPrice-' + sId);
+    const stickyPriceEl = document.getElementById('PdpStickyPrice-' + sId);
+    const compareEl = document.getElementById('PdpComparePrice-' + sId);
+    const skuEl = document.getElementById('PdpSku-' + sId);
+    const submitBtn = document.getElementById('PdpSubmitBtn-' + sId);
+    const stickyBtn = document.getElementById('PdpStickyBtn-' + sId);
+
+    root.querySelectorAll('[data-variant-btn]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const vId = btn.getAttribute('data-variant-btn');
+        const available = btn.getAttribute('data-available') === 'true';
+        const price = btn.getAttribute('data-price');
+        const compare = btn.getAttribute('data-compare');
+        const hasDiscount = btn.getAttribute('data-has-discount') === 'true';
+        const sku = btn.getAttribute('data-sku');
+        const vImg = btn.getAttribute('data-image');
+
+        if (hiddenId) hiddenId.value = vId;
+        if (priceEl) priceEl.textContent = price;
+        if (stickyPriceEl) stickyPriceEl.textContent = price;
+        if (vImg && mainImg) mainImg.src = vImg;
+
+        if (compareEl) {
+          compareEl.textContent = compare;
+          compareEl.classList.toggle('hidden', !hasDiscount);
+        }
+        if (skuEl) {
+          skuEl.textContent = 'SKU: ' + sku;
+          skuEl.classList.toggle('hidden', !sku);
+        }
+
+        root.querySelectorAll('[data-variant-btn]').forEach((b) => {
+          const active = b.getAttribute('data-variant-btn') === vId;
+          b.setAttribute('aria-pressed', String(active));
+          b.className = 'px-4 py-2 text-xs font-semibold rounded-sm border transition-colors ' +
+            (active ? 'border-[#C62828] bg-[#C62828] text-white' : 'border-[#EAE4E4] bg-white text-[#222222] hover:border-[#C62828]');
+        });
+
+        [submitBtn, stickyBtn].forEach((b) => {
+          if (!b) return;
+          b.disabled = !available;
+          b.textContent = available ? 'Add to Bag' : 'Out of Stock';
+          b.classList.toggle('opacity-50', !available);
+        });
+      });
+    });
+
+    // Quantity Stepper
+    const qtyInput = document.getElementById('PdpQtyInput-' + sId);
+    document.getElementById('PdpQtyMinus-' + sId)?.addEventListener('click', () => {
+      if (qtyInput) qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1, 10) - 1);
+    });
+    document.getElementById('PdpQtyPlus-' + sId)?.addEventListener('click', () => {
+      if (qtyInput) qtyInput.value = Math.min(20, parseInt(qtyInput.value || 1, 10) + 1);
+    });
+
+    stickyBtn?.addEventListener('click', () => {
+      document.getElementById('ProductForm')?.submit();
+    });
+
+    // Accessible Accordions
+    root.querySelectorAll('[data-pdp-acc]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const target = document.getElementById(trigger.getAttribute('data-pdp-acc'));
+        const icon = trigger.querySelector('[data-acc-icon]');
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', String(!expanded));
+        target?.setAttribute('aria-hidden', String(expanded));
+        icon?.classList.toggle('rotate-180', !expanded);
+        icon?.classList.toggle('text-[#C62828]', !expanded);
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "fallback_benefits",
+      "label": "Placeholder Benefits Copy (Shown if custom.benefits metafield is empty)",
+      "default": "Add verified product benefits via the custom.benefits product metafield in Shopify Admin."
+    }
+  ]
+}
+{% endschema %}

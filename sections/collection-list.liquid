@@ -1,0 +1,98 @@
+{% schema %}
+{
+  "name": "Category Grid",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Label",
+      "default": "Curated Departments"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Optional Subheading"
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "label": "Layout Style",
+      "options": [
+        { "value": "overlay_tile", "label": "Category Image Tiles (2-Col Mobile)" },
+        { "value": "editorial_card", "label": "Featured Collection Cards (3-Col)" }
+      ],
+      "default": "overlay_tile"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View All Link Text",
+      "default": "Browse Full Catalogue"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View All Link URL"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_item",
+      "name": "Category Item",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Override Image"
+        },
+        {
+          "type": "text",
+          "id": "custom_eyebrow",
+          "label": "Card Eyebrow",
+          "default": "Targeted Routine"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Override Title"
+        },
+        {
+          "type": "text",
+          "id": "custom_subtitle",
+          "label": "Short Description"
+        },
+        {
+          "type": "url",
+          "id": "custom_link",
+          "label": "Override Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Grid",
+      "blocks": [
+        { "type": "collection_item", "settings": { "custom_title": "Women" } },
+        { "type": "collection_item", "settings": { "custom_title": "Men" } },
+        { "type": "collection_item", "settings": { "custom_title": "Sun Protection" } },
+        { "type": "collection_item", "settings": { "custom_title": "Mother & Baby" } },
+        { "type": "collection_item", "settings": { "custom_title": "Brands" } },
+        { "type": "collection_item", "settings": { "custom_title": "Combo Deals" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

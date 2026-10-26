@@ -1,0 +1,174 @@
+{%- assign default_limit = section.settings.default_brand_limit | default: 25 -%}
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12" id="BrandsDir-{{ section.id }}">
+  <header class="bg-[#FAF8F8] border border-[#EAE4E4] rounded-sm p-6 sm:p-10 mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">
+        {{ section.settings.eyebrow | escape }}
+      </span>
+      <h1 class="font-editorial text-3xl sm:text-5xl font-semibold text-[#222222] mt-1">
+        {{ page.title | default: section.settings.heading | escape }}
+      </h1>
+      <p class="text-sm text-neutral-600 mt-2 max-w-2xl">
+        {{ section.settings.subheading | escape }}
+      </p>
+    </div>
+
+    <div class="flex items-center gap-2 shrink-0">
+      <button
+        type="button"
+        data-dir-limit="25"
+        class="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors {% if default_limit == 25 %}bg-[#C62828] text-white{% else %}bg-white border border-[#EAE4E4] text-[#222222]{% endif %}"
+      >
+        25 Brands View
+      </button>
+      <button
+        type="button"
+        data-dir-limit="18"
+        class="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors {% if default_limit == 18 %}bg-[#C62828] text-white{% else %}bg-white border border-[#EAE4E4] text-[#222222]{% endif %}"
+      >
+        18 Brands View
+      </button>
+    </div>
+  </header>
+
+  <div class="mb-6 max-w-md">
+    <label for="BrandFilterInput-{{ section.id }}" class="sr-only">Filter brands by name</label>
+    <input
+      type="search"
+      id="BrandFilterInput-{{ section.id }}"
+      placeholder="Filter brands by name or category focus..."
+      class="w-full px-4 py-2.5 text-sm border border-[#EAE4E4] rounded-sm focus:outline-none focus:border-[#C62828]"
+    >
+  </div>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks limit: 25 -%}
+        <a
+          href="{{ block.settings.link | default: routes.all_products_collection_url }}"
+          data-dir-card
+          data-dir-index="{{ forloop.index }}"
+          data-dir-search="{{ block.settings.brand_name | downcase }} {{ block.settings.category_focus | downcase }}"
+          class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-6 flex flex-col items-center text-center transition-all hover:shadow-sm {% if forloop.index > default_limit %}hidden{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.logo != blank -%}
+            <img
+              src="{{ block.settings.logo | image_url: width: 240 }}"
+              alt="{{ block.settings.brand_name | escape }}"
+              loading="lazy"
+              class="h-14 w-auto object-contain mb-3"
+            >
+          {%- else -%}
+            <div class="w-14 h-14 rounded-full bg-[#FAF8F8] border border-[#EAE4E4] flex items-center justify-center font-editorial text-xl font-bold text-[#C62828] mb-3">
+              BP{{ forloop.index | prepend: '0' | slice: -2, 2 }}
+            </div>
+          {%- endif -%}
+          <h2 class="text-sm font-semibold text-[#222222] group-hover:text-[#C62828]">{{ block.settings.brand_name | escape }}</h2>
+          <p class="text-[11px] text-neutral-500 mt-1">{{ block.settings.category_focus | escape }}</p>
+          <span class="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[#C62828]">View Products &rarr;</span>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..25) -%}
+        {%- liquid
+          assign num_padded = i | prepend: '0' | slice: -2, 2
+          assign mod3 = i | modulo: 3
+          assign mod2 = i | modulo: 2
+          if mod3 == 0
+            assign focus_label = 'Make-up & Color'
+          elsif mod2 == 0
+            assign focus_label = 'Clinical Skincare'
+          else
+            assign focus_label = 'Daily Essentials'
+          endif
+        -%}
+        <a
+          href="{{ routes.all_products_collection_url }}"
+          data-dir-card
+          data-dir-index="{{ i }}"
+          data-dir-search="brand placeholder {{ num_padded }} {{ focus_label | downcase }}"
+          class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-6 flex flex-col items-center text-center transition-all hover:shadow-sm {% if i > default_limit %}hidden{% endif %}"
+        >
+          <div class="w-14 h-14 rounded-full bg-[#FAF8F8] border border-[#EAE4E4] flex items-center justify-center font-editorial text-xl font-bold text-[#C62828] mb-3">
+            BP{{ num_padded }}
+          </div>
+          <h2 class="text-sm font-semibold text-[#222222] group-hover:text-[#C62828]">Brand Placeholder {{ num_padded }}</h2>
+          <p class="text-[11px] text-neutral-500 mt-1">{{ focus_label }}</p>
+          <span class="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[#C62828]">View Products &rarr;</span>
+        </a>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+
+  <script>
+    (function() {
+      const root = document.getElementById('BrandsDir-{{ section.id }}');
+      if (!root) return;
+      let activeLimit = {{ default_limit }};
+      let query = '';
+
+      const cards = root.querySelectorAll('[data-dir-card]');
+      const btns = root.querySelectorAll('[data-dir-limit]');
+      const input = document.getElementById('BrandFilterInput-{{ section.id }}');
+
+      const updateGrid = () => {
+        cards.forEach((card) => {
+          const idx = parseInt(card.getAttribute('data-dir-index'), 10);
+          const searchStr = card.getAttribute('data-dir-search') || '';
+          const withinLimit = idx <= activeLimit;
+          const matchesQuery = !query || searchStr.includes(query);
+          card.classList.toggle('hidden', !(withinLimit && matchesQuery));
+        });
+      };
+
+      btns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeLimit = parseInt(btn.getAttribute('data-dir-limit'), 10);
+          btns.forEach((b) => {
+            const active = b === btn;
+            b.className = 'px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors ' +
+              (active ? 'bg-[#C62828] text-white' : 'bg-white border border-[#EAE4E4] text-[#222222]');
+          });
+          updateGrid();
+        });
+      });
+
+      input?.addEventListener('input', (e) => {
+        query = e.target.value.trim().toLowerCase();
+        updateGrid();
+      });
+    })();
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Brands Directory Page",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow Label", "default": "Partner Houses" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Brand Directory" },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Browse our configurable brand showcase. Placeholder slots are ready to be populated once Vijay Traders supplies the verified brand logo assets."
+    },
+    { "type": "range", "id": "default_brand_limit", "min": 6, "max": 30, "step": 1, "label": "Default Brand Count", "default": 25 }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand Item",
+      "settings": [
+        { "type": "text", "id": "brand_name", "label": "Brand Name", "default": "Brand Placeholder" },
+        { "type": "text", "id": "category_focus", "label": "Category Focus", "default": "Daily Essentials" },
+        { "type": "image_picker", "id": "logo", "label": "Brand Logo" },
+        { "type": "url", "id": "link", "label": "Collection Link" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,94 @@
+{% comment %}
+  Renders a product card
+  Accepts:
+  - product: {Object} Shopify Product Liquid object
+{% endcomment %}
+
+{%- liquid
+  assign has_discount = false
+  if product.compare_at_price > product.price
+    assign has_discount = true
+    assign savings_pct = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round
+  endif
+-%}
+
+<article class="group bg-white border border-[#EAE4E4] rounded-sm flex flex-col justify-between overflow-hidden transition-shadow duration-300 hover:shadow-md">
+  <div>
+    <div class="relative aspect-[4/5] bg-[#FAF8F8] overflow-hidden">
+      <a href="{{ product.url }}" class="block w-full h-full focus:outline-none" aria-label="{{ product.title | escape }}">
+        {%- if product.featured_media -%}
+          <img
+            src="{{ product.featured_media | image_url: width: 600 }}"
+            alt="{{ product.featured_media.alt | default: product.title | escape }}"
+            loading="lazy"
+            width="400"
+            height="500"
+            class="product-card-img w-full h-full object-cover object-center"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover text-neutral-300' }}
+        {%- endif -%}
+      </a>
+
+      <div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 pointer-events-none">
+        {%- if has_discount -%}
+          <span class="bg-[#C62828] text-white text-[11px] font-semibold uppercase tracking-wider px-2.5 py-0.5 rounded-sm">
+            Save {{ savings_pct }}%
+          </span>
+        {%- endif -%}
+        {%- if product.tags contains 'combo' or product.type == 'Routine Bundle' -%}
+          <span class="bg-[#222222] text-white text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-sm">
+            Combo Deal
+          </span>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="p-3.5 sm:p-4">
+      {%- if product.vendor != blank -%}
+        <p class="text-[11px] uppercase tracking-widest text-neutral-500 font-medium mb-1 truncate">
+          {{ product.vendor }}
+        </p>
+      {%- endif -%}
+
+      <h3 class="text-sm sm:text-[15px] font-medium text-[#222222] leading-snug line-clamp-2 min-h-[2.5rem]">
+        <a href="{{ product.url }}" class="hover:text-[#C62828] transition-colors">
+          {{ product.title }}
+        </a>
+      </h3>
+
+      <div class="mt-2.5 flex items-baseline gap-2 flex-wrap">
+        <span class="text-sm sm:text-base font-bold text-[#C62828]">
+          {{ product.price | money }}
+        </span>
+        {%- if has_discount -%}
+          <span class="text-xs text-neutral-400 line-through">
+            {{ product.compare_at_price | money }}
+          </span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <div class="px-3.5 pb-3.5 sm:px-4 sm:pb-4 pt-1">
+    {%- if product.available -%}
+      <form method="post" action="{{ routes.cart_add_url }}">
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button
+          type="submit"
+          class="w-full py-2.5 px-3 text-xs sm:text-sm font-semibold uppercase tracking-wider border border-[#C62828] text-[#C62828] bg-white hover:bg-[#C62828] hover:text-white active:bg-[#E53935] transition-colors rounded-sm focus:outline-none"
+        >
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      </form>
+    {%- else -%}
+      <button
+        type="button"
+        disabled
+        class="w-full py-2.5 px-3 text-xs sm:text-sm font-semibold uppercase tracking-wider border border-[#EAE4E4] text-neutral-400 bg-[#FAF8F8] rounded-sm cursor-not-allowed"
+      >
+        {{ 'products.product.sold_out' | t }}
+      </button>
+    {%- endif -%}
+  </div>
+</article>

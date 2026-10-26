@@ -1,0 +1,451 @@
+{%- liquid
+  assign main_menu = linklists[section.settings.menu]
+  assign tel_href = 'tel:' | append: settings.contact_phone_tel
+  assign wa_href = 'https://wa.me/' | append: settings.whatsapp_number
+-%}
+
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-[#EAE4E4]" data-section-id="{{ section.id }}">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+
+      <!-- Left: Mobile Hamburger + Brand Logo -->
+      <div class="flex items-center gap-3 sm:gap-6">
+        <button
+          type="button"
+          id="HeaderMobileOpen-{{ section.id }}"
+          class="lg:hidden p-2 -ml-2 text-[#222222] hover:text-[#C62828] transition-colors"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="HeaderMobileDrawer-{{ section.id }}"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+
+        <a href="{{ routes.root_url }}" class="flex flex-col group focus:outline-none">
+          {%- if section.settings.logo != blank -%}
+            <img
+              src="{{ section.settings.logo | image_url: width: 320 }}"
+              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
+              width="{{ section.settings.logo_width }}"
+              height="{{ section.settings.logo_width | divided_by: section.settings.logo.aspect_ratio | round }}"
+              class="h-auto object-contain"
+            >
+          {%- else -%}
+            <span class="font-editorial text-2xl sm:text-3xl font-bold tracking-tight text-[#222222] group-hover:text-[#C62828] transition-colors">
+              VIJAY <span class="text-[#C62828]">TRADERS</span>
+            </span>
+            <span class="text-[9px] sm:text-[10px] uppercase tracking-[0.25em] text-neutral-500 -mt-1">
+              {{ section.settings.logo_subtext | escape }}
+            </span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Center: Desktop Main Navigation (Supports 2-Level Dropdowns & 3-Level Mega Menus) -->
+      <nav class="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
+        {%- for link in main_menu.links -%}
+          {%- assign is_combo = false -%}
+          {%- if link.title contains 'Combo' or link.url contains 'combo' -%}
+            {%- assign is_combo = true -%}
+          {%- endif -%}
+
+          {%- if link.links != blank -%}
+            {%- assign has_grandchild = false -%}
+            {%- for childlink in link.links -%}
+              {%- if childlink.links != blank -%}
+                {%- assign has_grandchild = true -%}
+              {%- endif -%}
+            {%- endfor -%}
+
+            <div class="relative group py-6">
+              <a
+                href="{{ link.url }}"
+                class="inline-flex items-center gap-1 text-sm font-medium {% if link.active %}text-[#C62828]{% else %}text-[#222222] hover:text-[#C62828]{% endif %} transition-colors"
+              >
+                <span>{{ link.title | escape }}</span>
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </a>
+
+              {%- if has_grandchild -%}
+                <!-- 3-Level Mega Menu Dropdown (e.g., Women + Make-up Hierarchy) -->
+                <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-200 absolute left-0 top-full w-[520px] bg-white border border-[#EAE4E4] shadow-xl rounded-sm p-6 grid grid-cols-2 gap-6 z-50">
+                  {%- for childlink in link.links -%}
+                    <div>
+                      <a href="{{ childlink.url }}" class="text-xs font-bold uppercase tracking-wider text-[#C62828] block mb-3 pb-1.5 border-b border-[#EAE4E4]">
+                        {{ childlink.title | escape }}
+                      </a>
+                      {%- if childlink.links != blank -%}
+                        <ul class="space-y-2 text-sm">
+                          {%- for grandchildlink in childlink.links -%}
+                            <li>
+                              <a href="{{ grandchildlink.url }}" class="text-neutral-700 hover:text-[#C62828] block py-0.5 transition-colors">
+                                {{ grandchildlink.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                <!-- 2-Level Standard Dropdown (e.g., Men's 4 Subcategories) -->
+                <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 focus-within:visible focus-within:opacity-100 transition-all duration-200 absolute left-0 top-full w-64 bg-white border border-[#EAE4E4] shadow-xl rounded-sm p-5 z-50">
+                  <a href="{{ link.url }}" class="text-xs font-bold uppercase tracking-wider text-[#C62828] block mb-3 pb-1.5 border-b border-[#EAE4E4]">
+                    All {{ link.title | escape }}
+                  </a>
+                  <ul class="space-y-2 text-sm">
+                    {%- for childlink in link.links -%}
+                      <li>
+                        <a href="{{ childlink.url }}" class="text-neutral-700 hover:text-[#C62828] block py-0.5 transition-colors">
+                          {{ childlink.title | escape }}
+                        </a>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- else -%}
+            <a
+              href="{{ link.url }}"
+              class="text-sm {% if is_combo %}font-semibold text-[#C62828] hover:text-[#E53935] flex items-center gap-1{% elsif link.active %}font-semibold text-[#C62828]{% else %}font-medium text-[#222222] hover:text-[#C62828]{% endif %} transition-colors"
+            >
+              <span>{{ link.title | escape }}</span>
+              {%- if is_combo -%}
+                <span class="bg-[#FAF8F8] border border-[#C62828]/30 text-[#C62828] text-[10px] px-1.5 py-0.2 rounded-sm">SAVE</span>
+              {%- endif -%}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <!-- Right: Search Trigger, Customer Account, Cart Bag -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        <button
+          type="button"
+          id="HeaderSearchOpen-{{ section.id }}"
+          class="p-2 text-[#222222] hover:text-[#C62828] transition-colors flex items-center gap-1.5"
+          aria-label="Open product search"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-4.35-4.35M16.65 10.825a5.825 5.825 0 11-11.65 0 5.825 5.825 0 0111.65 0z"/>
+          </svg>
+          <span class="hidden xl:inline text-xs font-medium uppercase tracking-wider">Search</span>
+        </button>
+
+        {%- if shop.customer_accounts_enabled -%}
+          <a
+            href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
+            class="hidden sm:inline-flex p-2 text-[#222222] hover:text-[#C62828] transition-colors"
+            aria-label="Account"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        <a
+          href="{{ routes.cart_url }}"
+          class="relative p-2 text-[#222222] hover:text-[#C62828] transition-colors flex items-center gap-1.5"
+          aria-label="Shopping bag ({{ cart.item_count }} items)"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span
+            data-cart-count
+            class="bg-[#C62828] text-white text-[11px] font-bold min-w-[20px] h-5 px-1.5 rounded-full inline-flex items-center justify-center"
+          >
+            {{ cart.item_count }}
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Drawer -->
+<div
+  id="HeaderMobileBackdrop-{{ section.id }}"
+  class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300"
+  aria-hidden="true"
+></div>
+
+<aside
+  id="HeaderMobileDrawer-{{ section.id }}"
+  class="fixed top-0 left-0 bottom-0 w-[85%] max-w-sm bg-white z-50 transform -translate-x-full transition-transform duration-300 flex flex-col justify-between overflow-y-auto"
+  aria-label="Mobile Navigation Drawer"
+  aria-hidden="true"
+>
+  <div>
+    <div class="p-4 border-b border-[#EAE4E4] flex items-center justify-between bg-[#FAF8F8]">
+      <span class="font-editorial text-xl font-bold tracking-tight text-[#222222]">
+        VIJAY <span class="text-[#C62828]">TRADERS</span>
+      </span>
+      <button
+        type="button"
+        id="HeaderMobileClose-{{ section.id }}"
+        class="p-2 text-[#222222] hover:text-[#C62828]"
+        aria-label="Close navigation menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="p-4 divide-y divide-[#EAE4E4]" aria-label="Mobile Categories">
+      {%- for link in main_menu.links -%}
+        {%- if link.links != blank -%}
+          <div class="py-2">
+            <div class="flex items-center justify-between">
+              <a href="{{ link.url }}" class="text-base font-semibold text-[#222222] py-2">{{ link.title | escape }}</a>
+              <button
+                type="button"
+                data-mob-acc="MobSub-{{ section.id }}-{{ forloop.index }}"
+                class="p-2 text-neutral-600"
+                aria-expanded="false"
+                aria-label="Toggle {{ link.title | escape }} submenu"
+              >
+                <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+            </div>
+            <ul id="MobSub-{{ section.id }}-{{ forloop.index }}" class="hidden pl-4 pb-2 space-y-2 text-sm border-l-2 border-[#C62828]/30 mt-1">
+              {%- for childlink in link.links -%}
+                <li>
+                  <a href="{{ childlink.url }}" class="block py-1 font-medium text-neutral-700 hover:text-[#C62828]">
+                    {{ childlink.title | escape }}
+                  </a>
+                  {%- if childlink.links != blank -%}
+                    <ul class="pl-3 mt-1 space-y-1 border-l border-[#EAE4E4]">
+                      {%- for grandchildlink in childlink.links -%}
+                        <li>
+                          <a href="{{ grandchildlink.url }}" class="block py-0.5 text-xs text-neutral-500 hover:text-[#C62828]">
+                            {{ grandchildlink.title | escape }}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- else -%}
+          <a
+            href="{{ link.url }}"
+            class="block py-3.5 text-base font-semibold {% if link.title contains 'Combo' %}text-[#C62828]{% else %}text-[#222222] hover:text-[#C62828]{% endif %}"
+          >
+            {{ link.title | escape }}
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+  </div>
+
+  <!-- Direct Mobile Drawer Contact Actions -->
+  <div class="p-4 bg-[#FAF8F8] border-t border-[#EAE4E4] space-y-2.5">
+    <p class="text-xs uppercase tracking-wider text-neutral-500 font-semibold">Need Assistance?</p>
+    <a
+      href="{{ tel_href }}"
+      class="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-white border border-[#EAE4E4] text-[#222222] text-xs font-semibold uppercase tracking-wider rounded-sm hover:border-[#C62828]"
+    >
+      Call Us Now
+    </a>
+    <a
+      href="{{ wa_href }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-[#C62828] text-white text-xs font-semibold uppercase tracking-wider rounded-sm hover:bg-[#E53935]"
+    >
+      Chat on WhatsApp
+    </a>
+  </div>
+</aside>
+
+<!-- Global Predictive Search Modal -->
+<div
+  id="HeaderSearchModal-{{ section.id }}"
+  class="fixed inset-0 bg-black/60 z-50 hidden items-start justify-center pt-12 sm:pt-20 px-4"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Search Products"
+>
+  <div class="bg-white w-full max-w-3xl rounded-sm shadow-2xl border border-[#EAE4E4] overflow-hidden">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="p-4 sm:p-5 border-b border-[#EAE4E4] flex items-center gap-3">
+      <input type="hidden" name="type" value="product">
+      <svg class="w-5 h-5 text-[#C62828] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M16.65 10.825a5.825 5.825 0 11-11.65 0 5.825 5.825 0 0111.65 0z"/>
+      </svg>
+      <label for="HeaderSearchInput-{{ section.id }}" class="sr-only">Search store</label>
+      <input
+        type="search"
+        name="q"
+        id="HeaderSearchInput-{{ section.id }}"
+        placeholder="{{ 'general.search.placeholder' | t }}"
+        class="w-full text-sm sm:text-base text-[#222222] placeholder-neutral-400 focus:outline-none"
+        autocomplete="off"
+      >
+      <button
+        type="button"
+        id="HeaderSearchClose-{{ section.id }}"
+        class="p-1.5 text-neutral-500 hover:text-[#C62828] text-xs uppercase tracking-wider font-semibold"
+        aria-label="Close search"
+      >
+        ESC
+      </button>
+    </form>
+
+    <div id="HeaderSearchResults-{{ section.id }}" class="p-4 sm:p-6 max-h-[65vh] overflow-y-auto bg-[#FAF8F8]">
+      <p class="text-xs text-neutral-500 uppercase tracking-wider">
+        Type above and press Enter, or select a live match below.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const openBtn = document.getElementById('HeaderMobileOpen-' + sectionId);
+    const closeBtn = document.getElementById('HeaderMobileClose-' + sectionId);
+    const drawer = document.getElementById('HeaderMobileDrawer-' + sectionId);
+    const backdrop = document.getElementById('HeaderMobileBackdrop-' + sectionId);
+
+    const toggleMobile = (isOpen) => {
+      if (!drawer || !backdrop) return;
+      openBtn?.setAttribute('aria-expanded', String(isOpen));
+      drawer.setAttribute('aria-hidden', String(!isOpen));
+      if (isOpen) {
+        backdrop.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          backdrop.classList.remove('opacity-0');
+          drawer.classList.remove('-translate-x-full');
+        });
+        document.body.classList.add('overflow-hidden');
+      } else {
+        backdrop.classList.add('opacity-0');
+        drawer.classList.add('-translate-x-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 300);
+        document.body.classList.remove('overflow-hidden');
+      }
+    };
+
+    openBtn?.addEventListener('click', () => toggleMobile(true));
+    closeBtn?.addEventListener('click', () => toggleMobile(false));
+    backdrop?.addEventListener('click', () => toggleMobile(false));
+
+    drawer?.querySelectorAll('[data-mob-acc]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(btn.getAttribute('data-mob-acc'));
+        if (!target) return;
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        target.classList.toggle('hidden', expanded);
+        btn.querySelector('svg')?.classList.toggle('rotate-180', !expanded);
+      });
+    });
+
+    // Predictive Search Modal Logic
+    const searchOpen = document.getElementById('HeaderSearchOpen-' + sectionId);
+    const searchClose = document.getElementById('HeaderSearchClose-' + sectionId);
+    const searchModal = document.getElementById('HeaderSearchModal-' + sectionId);
+    const searchInput = document.getElementById('HeaderSearchInput-' + sectionId);
+    const searchResults = document.getElementById('HeaderSearchResults-' + sectionId);
+
+    const closeSearch = () => {
+      searchModal?.classList.add('hidden');
+      searchModal?.classList.remove('flex');
+    };
+
+    searchOpen?.addEventListener('click', () => {
+      searchModal?.classList.remove('hidden');
+      searchModal?.classList.add('flex');
+      searchInput?.focus();
+    });
+    searchClose?.addEventListener('click', closeSearch);
+    searchModal?.addEventListener('click', (e) => {
+      if (e.target === searchModal) closeSearch();
+    });
+
+    let debounceTimer;
+    searchInput?.addEventListener('input', (e) => {
+      const q = e.target.value.trim();
+      clearTimeout(debounceTimer);
+      if (q.length < 2) {
+        searchResults.innerHTML = '<p class="text-xs text-neutral-500 uppercase tracking-wider">Enter at least 2 characters to search products.</p>';
+        return;
+      }
+      debounceTimer = setTimeout(() => {
+        fetch(`${window.Shopify?.routes?.root || '/'}search/suggest.json?q=${encodeURIComponent(q)}&resources[type]=product&resources[limit]=6`)
+          .then((res) => res.json())
+          .then((data) => {
+            const products = data?.resources?.results?.products || [];
+            if (products.length === 0) {
+              searchResults.innerHTML = `<p class="text-sm text-[#222222] py-4 text-center">No matching products found for "${q}".</p>`;
+              return;
+            }
+            searchResults.innerHTML = `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                ${products.map((p) => `
+                  <a href="${p.url}" class="flex items-center gap-3 p-2.5 bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm transition-colors">
+                    <img src="${p.image}" alt="${p.title}" class="w-14 h-16 object-cover bg-[#FAF8F8] shrink-0" />
+                    <div class="min-w-0">
+                      <p class="text-[10px] uppercase tracking-wider text-neutral-500 truncate">${p.vendor || ''}</p>
+                      <p class="text-xs font-semibold text-[#222222] line-clamp-1">${p.title}</p>
+                      <p class="text-xs font-bold text-[#C62828] mt-0.5">${p.price}</p>
+                    </div>
+                  </a>
+                `).join('')}
+              </div>
+            `;
+          })
+          .catch(() => {});
+      }, 250);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Custom Logo Image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 80,
+      "max": 260,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Width",
+      "default": 160
+    },
+    {
+      "type": "text",
+      "id": "logo_subtext",
+      "label": "Text Logo Subtitle",
+      "default": "Cosmetics & Skincare"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main Navigation Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

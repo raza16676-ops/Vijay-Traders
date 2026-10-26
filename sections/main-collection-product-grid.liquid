@@ -1,0 +1,215 @@
+{%- paginate collection.products by section.settings.products_per_page -%}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10" data-section-id="{{ section.id }}">
+  <!-- Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="text-xs text-neutral-500 mb-6">
+    <ol class="flex items-center space-x-2">
+      <li><a href="{{ routes.root_url }}" class="hover:text-[#C62828]">Home</a></li>
+      <li><span>/</span></li>
+      <li class="text-[#222222] font-semibold" aria-current="page">{{ collection.title }}</li>
+    </ol>
+  </nav>
+
+  <!-- Collection Banner Header -->
+  <header class="bg-[#FAF8F8] border border-[#EAE4E4] rounded-sm p-6 sm:p-10 mb-8">
+    <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">Vijay Traders Catalogue</span>
+    <h1 class="font-editorial text-3xl sm:text-5xl font-semibold text-[#222222] mt-1">
+      {{ collection.title }}
+    </h1>
+    {%- if collection.description != blank -%}
+      <div class="text-sm text-neutral-600 mt-2 max-w-2xl leading-relaxed">
+        {{ collection.description }}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Subcategory Pills (Automatically renders if a matching menu handle exists for women, men, or make-up) {%- endcomment -%}
+    {%- assign sub_menu = linklists[collection.handle] -%}
+    {%- if sub_menu.links != blank -%}
+      <div class="mt-5 flex flex-wrap gap-2">
+        <a
+          href="{{ collection.url }}"
+          class="px-3.5 py-1.5 text-xs font-semibold rounded-sm border bg-[#C62828] text-white border-[#C62828]"
+        >
+          All {{ collection.title }}
+        </a>
+        {%- for sublink in sub_menu.links -%}
+          <a
+            href="{{ sublink.url }}"
+            class="px-3.5 py-1.5 text-xs font-semibold rounded-sm border bg-white text-[#222222] border-[#EAE4E4] hover:border-[#C62828] transition-colors"
+          >
+            {{ sublink.title | escape }}
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </header>
+
+  <!-- Toolbar: Mobile Filter Trigger, Product Count, Sort Control -->
+  <div class="flex flex-wrap items-center justify-between gap-4 pb-4 mb-6 border-b border-[#EAE4E4]">
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        id="ColMobileFilterOpen-{{ section.id }}"
+        class="lg:hidden inline-flex items-center gap-2 px-4 py-2 border border-[#222222] text-xs font-semibold uppercase tracking-wider rounded-sm hover:border-[#C62828] hover:text-[#C62828]"
+      >
+        <span>Filter</span>
+      </button>
+      <p class="text-xs sm:text-sm text-neutral-600 font-medium">
+        Showing {{ collection.products_count }} product{% if collection.products_count != 1 %}s{% endif %}
+      </p>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <label for="SortBy-{{ section.id }}" class="text-xs uppercase tracking-wider text-neutral-500 font-semibold">Sort by:</label>
+      {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+      <select
+        id="SortBy-{{ section.id }}"
+        class="text-xs sm:text-sm border border-[#EAE4E4] rounded-sm px-3 py-2 bg-white text-[#222222] focus:border-[#C62828] focus:outline-none"
+        onchange="const url = new URL(window.location.href); url.searchParams.set('sort_by', this.value); window.location.href = url.toString();"
+      >
+        {%- for option in collection.sort_options -%}
+          <option value="{{ option.value | escape }}" {% if option.value == sort_by %}selected="selected"{% endif %}>
+            {{ option.name | escape }}
+          </option>
+        {%- endfor -%}
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Desktop Filter Sidebar (Native Shopify Storefront Filters) -->
+    <aside class="hidden lg:block lg:col-span-3" aria-label="Product Filters">
+      <form id="CollectionFiltersForm" class="bg-[#FAF8F8] border border-[#EAE4E4] rounded-sm p-5 space-y-6">
+        {%- for filter in collection.filters -%}
+          <div class="border-b border-[#EAE4E4] pb-5 last:border-b-0 last:pb-0">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-[#222222] mb-3">{{ filter.label | escape }}</h3>
+
+            {%- case filter.type -%}
+              {%- when 'boolean', 'list' -%}
+                <ul class="space-y-2 text-sm max-h-52 overflow-y-auto">
+                  {%- for value in filter.values -%}
+                    <li>
+                      <label class="inline-flex items-center gap-2 cursor-pointer text-neutral-700 hover:text-[#C62828]">
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          onchange="this.form.submit()"
+                          class="accent-[#C62828] w-4 h-4"
+                        >
+                        <span>{{ value.label | escape }} ({{ value.count }})</span>
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+
+              {%- when 'price_range' -%}
+                <div class="space-y-3 text-xs">
+                  <div class="flex items-center gap-2">
+                    <input
+                      name="{{ filter.min_value.param_name }}"
+                      type="number"
+                      placeholder="Min"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                      class="w-full px-2.5 py-1.5 border border-[#EAE4E4] rounded-sm bg-white"
+                    >
+                    <span>to</span>
+                    <input
+                      name="{{ filter.max_value.param_name }}"
+                      type="number"
+                      placeholder="Max"
+                      min="0"
+                      max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                      {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                      class="w-full px-2.5 py-1.5 border border-[#EAE4E4] rounded-sm bg-white"
+                    >
+                  </div>
+                  <button type="submit" class="w-full py-2 bg-[#222222] hover:bg-[#C62828] text-white text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors">
+                    Apply Price
+                  </button>
+                </div>
+            {%- endcase -%}
+          </div>
+        {%- endfor -%}
+
+        <a
+          href="{{ collection.url }}"
+          class="block text-center text-xs font-semibold uppercase tracking-wider text-[#C62828] hover:underline pt-2"
+        >
+          Reset All Filters
+        </a>
+      </form>
+    </aside>
+
+    <!-- Product Grid + Pagination -->
+    <section class="lg:col-span-9" aria-label="Collection Products">
+      {%- if collection.products.size > 0 -%}
+        <!-- Two-Column Mobile Grid (grid-cols-2) | Three-Column Desktop Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-6">
+          {%- for product in collection.products -%}
+            {% render 'card-product', product: product %}
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          <nav class="mt-10 flex items-center justify-center gap-2" role="navigation" aria-label="Pagination">
+            {%- if paginate.previous -%}
+              <a href="{{ paginate.previous.url }}" class="px-3 py-2 text-xs font-semibold border border-[#EAE4E4] hover:border-[#C62828] rounded-sm">&larr; Prev</a>
+            {%- endif -%}
+
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="w-9 h-9 inline-flex items-center justify-center text-xs font-semibold border border-[#EAE4E4] hover:border-[#C62828] rounded-sm">
+                  {{ part.title }}
+                </a>
+              {%- else -%}
+                <span class="w-9 h-9 inline-flex items-center justify-center text-xs font-semibold bg-[#C62828] text-white rounded-sm">
+                  {{ part.title }}
+                </span>
+              {%- endif -%}
+            {%- endfor -%}
+
+            {%- if paginate.next -%}
+              <a href="{{ paginate.next.url }}" class="px-3 py-2 text-xs font-semibold border border-[#EAE4E4] hover:border-[#C62828] rounded-sm">Next &rarr;</a>
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
+
+      {%- else -%}
+        <div class="text-center py-16 px-4 bg-[#FAF8F8] border border-[#EAE4E4] rounded-sm">
+          <h2 class="font-editorial text-2xl font-semibold text-[#222222]">No Matching Products Found</h2>
+          <p class="text-sm text-neutral-600 mt-1 max-w-md mx-auto">
+            Try clearing your active filters to view available skincare and cosmetics.
+          </p>
+          <a
+            href="{{ collection.url }}"
+            class="inline-block mt-5 px-6 py-2.5 bg-[#C62828] text-white text-xs font-semibold uppercase tracking-widest rounded-sm hover:bg-[#E53935]"
+          >
+            Reset All Filters
+          </a>
+        </div>
+      {%- endif -%}
+    </section>
+  </div>
+</div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Collection Product Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 6,
+      "max": 24,
+      "step": 3,
+      "label": "Products per page",
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

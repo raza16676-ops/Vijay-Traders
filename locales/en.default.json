@@ -1,0 +1,16 @@
+{
+    "general": {
+      "accessibility": {
+        "skip_to_text": "Skip to main content"
+      },
+      "search": {
+        "placeholder": "Search serums, sunscreens, lip tints, combo deals..."
+      }
+    },
+    "products": {
+      "product": {
+        "add_to_cart": "Add to Bag",
+        "sold_out": "Out of Stock"
+      }
+    }
+  }

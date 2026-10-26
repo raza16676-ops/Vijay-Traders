@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vijay Traders | Premium Cosmetics, Skincare &amp; Beauty Essentials</title>
+  <meta name="description" content="Shop curated skincare, cosmetics, sun protection, mother & baby care, and value combo deals at Vijay Traders." />
+  <!-- Tailwind CSS CDN for Standalone Prototype (Configure PostCSS/CLI for Production Shopify Theme) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="src/css/custom.css" />
+</head>
+<body class="bg-white text-[#222222] antialiased selection:bg-[#C62828] selection:text-white">
+
+  <!-- Global Announcement Bar, Header, Mobile Drawer & Search Modal -->
+  <div id="global-header"></div>
+
+  <main id="main-content">
+    <!-- SECTION A: HERO SLIDESHOW -->
+    <section id="hero-carousel-mount" aria-label="Hero Banner Slideshow"></section>
+
+    <!-- SECTION B: SHOP BY CATEGORY (2-Column Mobile Grid, 6-Column Desktop) -->
+    <section class="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-labelledby="heading-categories">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">Curated Departments</span>
+          <h2 id="heading-categories" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+            Shop by Category
+          </h2>
+        </div>
+        <a href="collection.html" class="text-xs font-bold uppercase tracking-widest text-[#C62828] hover:underline">
+          Browse Full Catalogue &rarr;
+        </a>
+      </div>
+
+      <!-- Mobile: 2-Column Grid (grid-cols-2) | Desktop: 3 to 6 Columns -->
+      <div id="home-categories-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-5"></div>
+    </section>
+
+    <!-- SECTION C: BEST SELLERS -->
+    <section class="py-12 sm:py-16 bg-[#FAF8F8] border-y border-[#EAE4E4]" aria-labelledby="heading-bestsellers">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">Most Requested</span>
+            <h2 id="heading-bestsellers" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+              Best Sellers
+            </h2>
+            <p class="text-sm text-neutral-600 mt-1">Everyday formulations loved for visible results and effortless wear.</p>
+          </div>
+          <a
+            href="collection.html?sort=best-selling"
+            class="inline-flex items-center justify-center px-5 py-2.5 border border-[#C62828] text-[#C62828] hover:bg-[#C62828] hover:text-white text-xs font-semibold uppercase tracking-widest rounded-sm transition-colors self-start sm:self-auto"
+          >
+            View All Best Sellers
+          </a>
+        </div>
+
+        <!-- Mobile: Two-Column Product Grid | Desktop: Four-Column Product Grid -->
+        <div id="home-bestsellers-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6"></div>
+      </div>
+    </section>
+
+    <!-- SECTION D: FEATURED COLLECTIONS -->
+    <section class="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-labelledby="heading-featured-collections">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">Targeted Routines</span>
+        <h2 id="heading-featured-collections" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+          Featured Collections
+        </h2>
+        <p class="text-sm text-neutral-600 mt-2">
+          Thoughtfully organized skincare, sun care, and color cosmetics for every routine.
+        </p>
+      </div>
+
+      <div id="home-featured-collections" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- SECTION E: BRANDS SHOWCASE (Supports 25 or 18 Configurable Brands) -->
+    <section class="py-12 sm:py-16 bg-[#FAF8F8] border-y border-[#EAE4E4]" aria-labelledby="heading-brands">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">Official Retail Directory</span>
+            <h2 id="heading-brands" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+              Shop by Brand
+            </h2>
+            <p class="text-xs sm:text-sm text-neutral-600 mt-1">
+              Replaceable brand placeholders configured for up to 25 partner brands.
+            </p>
+          </div>
+
+          <!-- Configurable Count Switcher (25 vs 18 per specification note) -->
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-xs text-neutral-500 font-medium">Preview Capacity:</span>
+            <button type="button" id="toggle-brands-25" class="px-3 py-1 text-xs font-semibold rounded-sm bg-[#C62828] text-white">
+              Show 25 Brands
+            </button>
+            <button type="button" id="toggle-brands-18" class="px-3 py-1 text-xs font-semibold rounded-sm bg-white border border-[#EAE4E4] text-[#222222]">
+              Show 18 Brands
+            </button>
+            <a href="brands.html" class="text-xs font-bold uppercase tracking-wider text-[#C62828] hover:underline ml-2">
+              View All Brands &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div id="home-brands-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4"></div>
+      </div>
+    </section>
+
+    <!-- SECTION F: COMBO DEALS -->
+    <section class="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-labelledby="heading-combos">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">Curated Routine Sets</span>
+          <h2 id="heading-combos" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+            Value Combo Deals
+          </h2>
+          <p class="text-sm text-neutral-600 mt-1">
+            Paired formulations with transparent bundle savings calculated from individual item prices.
+          </p>
+        </div>
+        <a href="collection.html?category=combo-deals" class="text-xs font-bold uppercase tracking-widest text-[#C62828] hover:underline">
+          Explore All Combo Deals &rarr;
+        </a>
+      </div>
+
+      <div id="home-combos-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- SECTION G: PROMOTIONAL BANNER -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16" aria-label="Seasonal Campaign Spotlight">
+      <div class="relative rounded-sm overflow-hidden bg-[#222222] text-white border border-[#EAE4E4]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 items-center">
+          <div class="lg:col-span-7 p-8 sm:p-12 lg:p-16 space-y-4">
+            <span class="inline-block bg-[#C62828] text-white text-[11px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-sm">
+              Daily UV Defense Campaign
+            </span>
+            <h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">
+              Protect Your Skin Barrier Every Single Morning
+            </h2>
+            <p class="text-sm sm:text-base text-neutral-300 max-w-xl leading-relaxed">
+              Discover lightweight, invisible-finish SPF 50+ sunscreens and soothing after-sun care curated for year-round tropical sunshine.
+            </p>
+            <div class="pt-3 flex flex-wrap gap-4">
+              <a
+                href="collection.html?category=sun-protection"
+                class="px-7 py-3.5 bg-[#C62828] hover:bg-[#E53935] text-white text-xs sm:text-sm font-semibold uppercase tracking-widest rounded-sm transition-colors"
+              >
+                Shop Sun Protection
+              </a>
+              <a
+                href="collection.html?category=mother-baby"
+                class="px-7 py-3.5 bg-transparent border border-white/40 hover:border-white text-white text-xs sm:text-sm font-semibold uppercase tracking-widest rounded-sm transition-colors"
+              >
+                Explore Mother &amp; Baby
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5 h-64 sm:h-80 lg:h-full">
+            <img
+              src="https://images.unsplash.com/photo-1526947425960-945c6e72858f?auto=format&fit=crop&w=1000&q=80"
+              alt="Sun protection skincare essentials"
+              loading="lazy"
+              width="800"
+              height="600"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sections H & I: Social Media Bar & Global Footer -->
+  <div id="global-footer"></div>
+
+  <script type="module" src="src/js/main.js"></script>
+  <script type="module" src="src/js/home.js"></script>
+</body>
+</html>
