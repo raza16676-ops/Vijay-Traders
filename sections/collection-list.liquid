@@ -1,3 +1,174 @@
+<section
+  class="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+  aria-labelledby="SectionHeading-{{ section.id }}"
+>
+  <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">
+          {{ section.settings.eyebrow | escape }}
+        </span>
+      {%- endif -%}
+      <h2 id="SectionHeading-{{ section.id }}" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+        {{ section.settings.heading | escape }}
+      </h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="text-sm text-neutral-600 mt-1 max-w-2xl">
+          {{ section.settings.subheading | escape }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.view_all_label != blank -%}
+      <a
+        href="{{ section.settings.view_all_link | default: routes.all_products_collection_url }}"
+        class="text-xs font-bold uppercase tracking-widest text-[#C62828] hover:underline shrink-0"
+      >
+        {{ section.settings.view_all_label | escape }} &rarr;
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.card_style == 'overlay_tile' -%}
+    <!-- Section B: 2-Column Mobile Grid (grid-cols-2), 6-Column Desktop Grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-5">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign col = block.settings.collection
+          assign tile_title = block.settings.custom_title | default: col.title | default: 'Category'
+          assign tile_desc = block.settings.custom_subtitle | default: col.description | strip_html | truncate: 60
+          assign tile_url = block.settings.custom_link | default: col.url | default: routes.all_products_collection_url
+          assign tile_img = block.settings.custom_image | default: col.featured_image
+
+          case forloop.index
+            when 1
+              assign fallback_img = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=800&q=80'
+            when 2
+              assign fallback_img = 'https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=800&q=80'
+            when 3
+              assign fallback_img = 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=800&q=80'
+            when 4
+              assign fallback_img = 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80'
+            when 5
+              assign fallback_img = 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=800&q=80'
+            else
+              assign fallback_img = 'https://images.unsplash.com/photo-1608248597359-0e6d526a6c18?auto=format&fit=crop&w=800&q=80'
+          endcase
+        -%}
+        <a
+          href="{{ tile_url }}"
+          class="group relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-sm border border-[#EAE4E4] bg-[#FAF8F8] flex flex-col justify-end"
+          {{ block.shopify_attributes }}
+        >
+          {%- if tile_img != blank -%}
+            <img
+              src="{{ tile_img | image_url: width: 600 }}"
+              alt="{{ tile_title | escape }}"
+              loading="lazy"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            >
+          {%- else -%}
+            <img
+              src="{{ fallback_img }}"
+              alt="{{ tile_title | escape }}"
+              loading="lazy"
+              class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+            >
+          {%- endif -%}
+
+          <div class="absolute inset-0 bg-gradient-to-t from-[#222222]/85 via-[#222222]/25 to-transparent"></div>
+          <div class="relative z-10 p-4 sm:p-5 text-white">
+            <h3 class="font-editorial text-xl sm:text-2xl font-semibold tracking-wide">
+              {{ tile_title | escape }}
+            </h3>
+            {%- if tile_desc != blank -%}
+              <p class="text-xs text-neutral-200 mt-0.5 line-clamp-1 hidden sm:block">
+                {{ tile_desc | escape }}
+              </p>
+            {%- endif -%}
+            <span class="inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-widest text-white mt-2 border-b border-[#E53935] pb-0.5 group-hover:text-[#E53935] transition-colors">
+              Explore &rarr;
+            </span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+
+  {%- else -%}
+    <!-- Section D: Featured Collection Editorial Cards (3 Columns on Desktop) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign col = block.settings.collection
+          assign card_title = block.settings.custom_title | default: col.title | default: 'Featured Collection'
+          assign card_eyebrow = block.settings.custom_eyebrow | default: 'Targeted Routine'
+          assign card_desc = block.settings.custom_subtitle | default: col.description | strip_html | truncate: 120
+          assign card_url = block.settings.custom_link | default: col.url | default: routes.all_products_collection_url
+          assign card_img = block.settings.custom_image | default: col.featured_image
+
+          case forloop.index
+            when 1
+              assign fallback_spot = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=900&q=80'
+            when 2
+              assign fallback_spot = 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=80'
+            else
+              assign fallback_spot = 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=900&q=80'
+          endcase
+        -%}
+        <div
+          class="group bg-white border border-[#EAE4E4] rounded-sm overflow-hidden flex flex-col justify-between"
+          {{ block.shopify_attributes }}
+        >
+          <a href="{{ card_url }}" class="aspect-[16/10] overflow-hidden bg-[#FAF8F8] block">
+            {%- if card_img != blank -%}
+              <img
+                src="{{ card_img | image_url: width: 800 }}"
+                alt="{{ card_title | escape }}"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+            {%- else -%}
+              <img
+                src="{{ fallback_spot }}"
+                alt="{{ card_title | escape }}"
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+            {%- endif -%}
+          </a>
+
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-widest text-[#C62828]">
+                {{ card_eyebrow | escape }}
+              </span>
+              <h3 class="font-editorial text-2xl font-semibold text-[#222222] mt-1">
+                <a href="{{ card_url }}" class="hover:text-[#C62828] transition-colors">
+                  {{ card_title | escape }}
+                </a>
+              </h3>
+              {%- if card_desc != blank -%}
+                <p class="text-sm text-neutral-600 mt-2 leading-relaxed">
+                  {{ card_desc | escape }}
+                </p>
+              {%- endif -%}
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-[#EAE4E4]">
+              <a
+                href="{{ card_url }}"
+                class="inline-flex items-center text-xs font-bold uppercase tracking-widest text-[#222222] group-hover:text-[#C62828] transition-colors"
+              >
+                Shop Collection &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
 {% schema %}
 {
   "name": "Category Grid",

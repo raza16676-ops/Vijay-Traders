@@ -1,3 +1,166 @@
+{%- liquid
+  assign target_collection = collections[section.settings.collection]
+  if target_collection == blank or target_collection.products_count == 0
+    assign target_collection = collections['all']
+  endif
+  assign products_limit = section.settings.products_to_show | default: 4
+-%}
+
+<section
+  class="py-12 sm:py-16 {% if section.settings.use_subtle_bg %}bg-[#FAF8F8] border-y border-[#EAE4E4]{% else %}bg-white{% endif %}"
+  aria-labelledby="FeaturedColHeading-{{ section.id }}"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+      <div>
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">
+            {{ section.settings.eyebrow | escape }}
+          </span>
+        {%- endif -%}
+        <h2 id="FeaturedColHeading-{{ section.id }}" class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-1">
+          {{ section.settings.heading | escape }}
+        </h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="text-sm text-neutral-600 mt-1">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.view_all_label != blank -%}
+        <a
+          href="{{ target_collection.url | default: routes.all_products_collection_url }}"
+          class="inline-flex items-center justify-center px-5 py-2.5 border border-[#C62828] text-[#C62828] hover:bg-[#C62828] hover:text-white text-xs font-semibold uppercase tracking-widest rounded-sm transition-colors self-start sm:self-auto"
+        >
+          {{ section.settings.view_all_label | escape }}
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.layout_mode == 'combo_bundles' -%}
+      <!-- Section F: Value Combo Deals Bundle Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Combo Card 1 -->
+        <article class="bg-white border-2 border-[#C62828]/20 hover:border-[#C62828] rounded-sm overflow-hidden flex flex-col justify-between transition-colors">
+          <div>
+            <div class="relative aspect-[16/10] bg-[#FAF8F8] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1608248597359-0e6d526a6c18?auto=format&fit=crop&w=900&q=80" alt="AM Clarifying & Sun Defense Duo" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 bg-[#C62828] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-sm shadow-sm">Save Rs. 800</span>
+            </div>
+            <div class="p-5">
+              <span class="text-[11px] font-bold uppercase tracking-widest text-[#C62828]">Vijay Traders Curated Bundle</span>
+              <h3 class="font-editorial text-2xl font-semibold text-[#222222] mt-1">AM Clarifying &amp; Sun Defense Duo [Sample]</h3>
+              <p class="text-xs text-neutral-600 mt-2">Complete 2-step morning routine pairing oil-balancing Niacinamide with invisible SPF 50+ protection.</p>
+              <div class="mt-4 pt-3 border-t border-[#EAE4E4]">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1.5">Included in Bundle:</p>
+                <ul class="space-y-1 text-xs text-[#222222]">
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Niacinamide 10% + Zinc Serum (30 ml)</span></li>
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Ultra-Light Fluid Sunscreen SPF 50+ (50 ml)</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-3 flex items-center justify-between gap-4 border-t border-[#EAE4E4] bg-[#FAF8F8]">
+            <div>
+              <span class="block text-[10px] uppercase tracking-wider text-neutral-500">Bundle Price</span>
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-[#C62828]">Rs. 5,450</span>
+                <span class="text-xs text-neutral-400 line-through">Rs. 6,250</span>
+              </div>
+            </div>
+            <a href="{{ routes.all_products_collection_url }}" class="px-5 py-2.5 bg-[#C62828] hover:bg-[#E53935] text-white text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors">View Bundle</a>
+          </div>
+        </article>
+
+        <!-- Combo Card 2 -->
+        <article class="bg-white border-2 border-[#C62828]/20 hover:border-[#C62828] rounded-sm overflow-hidden flex flex-col justify-between transition-colors">
+          <div>
+            <div class="relative aspect-[16/10] bg-[#FAF8F8] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1621607512214-68297480165e?auto=format&fit=crop&w=900&q=80" alt="Men's Daily Cleanse & Recovery Duo" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 bg-[#C62828] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-sm shadow-sm">Save Rs. 500</span>
+            </div>
+            <div class="p-5">
+              <span class="text-[11px] font-bold uppercase tracking-widest text-[#C62828]">Vijay Traders Curated Bundle</span>
+              <h3 class="font-editorial text-2xl font-semibold text-[#222222] mt-1">Men's Daily Cleanse &amp; Recovery Duo [Sample]</h3>
+              <p class="text-xs text-neutral-600 mt-2">Essential two-step men's purifying face wash and alcohol-free post-shave hydrator.</p>
+              <div class="mt-4 pt-3 border-t border-[#EAE4E4]">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1.5">Included in Bundle:</p>
+                <ul class="space-y-1 text-xs text-[#222222]">
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Men's Salicylic + Charcoal Gel Wash (150 ml)</span></li>
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Soothing Post-Shave Recovery Fluid (100 ml)</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-3 flex items-center justify-between gap-4 border-t border-[#EAE4E4] bg-[#FAF8F8]">
+            <div>
+              <span class="block text-[10px] uppercase tracking-wider text-neutral-500">Bundle Price</span>
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-[#C62828]">Rs. 3,750</span>
+                <span class="text-xs text-neutral-400 line-through">Rs. 4,250</span>
+              </div>
+            </div>
+            <a href="{{ routes.all_products_collection_url }}" class="px-5 py-2.5 bg-[#C62828] hover:bg-[#E53935] text-white text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors">View Bundle</a>
+          </div>
+        </article>
+
+        <!-- Combo Card 3 -->
+        <article class="bg-white border-2 border-[#C62828]/20 hover:border-[#C62828] rounded-sm overflow-hidden flex flex-col justify-between transition-colors">
+          <div>
+            <div class="relative aspect-[16/10] bg-[#FAF8F8] overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80" alt="Hydra-Glow Skin & Velvet Lip Trio" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 bg-[#C62828] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-sm shadow-sm">Save Rs. 1,200</span>
+            </div>
+            <div class="p-5">
+              <span class="text-[11px] font-bold uppercase tracking-widest text-[#C62828]">Vijay Traders Curated Bundle</span>
+              <h3 class="font-editorial text-2xl font-semibold text-[#222222] mt-1">Hydra-Glow Skin &amp; Velvet Lip Trio [Sample]</h3>
+              <p class="text-xs text-neutral-600 mt-2">Prep, perfect, and add a touch of crimson color with this 3-piece makeup and skincare set.</p>
+              <div class="mt-4 pt-3 border-t border-[#EAE4E4]">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1.5">Included in Bundle:</p>
+                <ul class="space-y-1 text-xs text-[#222222]">
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Hyaluronic + B5 Gel Moisturizer (50 g)</span></li>
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Second-Skin Serum Foundation (30 ml)</span></li>
+                  <li class="flex items-start gap-1.5"><span class="text-[#C62828] font-bold">&bull;</span><span>Velvet Matte Lip &amp; Cheek Tint (01 Crimson)</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-3 flex items-center justify-between gap-4 border-t border-[#EAE4E4] bg-[#FAF8F8]">
+            <div>
+              <span class="block text-[10px] uppercase tracking-wider text-neutral-500">Bundle Price</span>
+              <div class="flex items-baseline gap-2">
+                <span class="text-lg font-bold text-[#C62828]">Rs. 8,250</span>
+                <span class="text-xs text-neutral-400 line-through">Rs. 9,450</span>
+              </div>
+            </div>
+            <a href="{{ routes.all_products_collection_url }}" class="px-5 py-2.5 bg-[#C62828] hover:bg-[#E53935] text-white text-xs font-semibold uppercase tracking-wider rounded-sm transition-colors">View Bundle</a>
+          </div>
+        </article>
+      </div>
+
+    {%- else -%}
+      <!-- Section C: Best Sellers Product Grid (2-Col Mobile / 4-Col Desktop) -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6">
+        {%- for product in target_collection.products limit: products_limit -%}
+          {% render 'card-product', product: product %}
+        {%- else -%}
+          {%- for i in (1..4) -%}
+            <div class="bg-white border border-[#EAE4E4] rounded-sm p-4">
+              <div class="aspect-[4/5] bg-[#FAF8F8] mb-3 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="Sample Product {{ i }}" class="w-full h-full object-cover">
+              </div>
+              <p class="text-[11px] uppercase tracking-widest text-neutral-500 font-semibold">Vijay Traders</p>
+              <p class="text-sm font-semibold text-[#222222] mt-1">Daily Clarifying Serum {{ i }} [Sample]</p>
+              <p class="text-sm font-bold text-[#C62828] mt-2">Rs. 2,850</p>
+            </div>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
 {% schema %}
 {
   "name": "Featured Collection",
