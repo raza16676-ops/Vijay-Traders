@@ -1,149 +1,229 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "sections": {
-      "section_a_hero": {
-        "type": "slideshow",
-        "blocks": {
-          "slide_1": {
-            "type": "slide",
-            "settings": {
-              "badge": "Your Beauty Essentials",
-              "heading": "Discover Your Everyday Glow",
-              "subheading": "Explore dermatologically inspired skincare and beauty essentials curated for your daily routine.",
-              "button_label": "Shop Now",
-              "button_link": "shopify://collections/all"
-            }
-          },
-          "slide_2": {
-            "type": "slide",
-            "settings": {
-              "badge": "Skincare Collection",
-              "heading": "Care That Shows",
-              "subheading": "Find targeted serums, gentle cleansers, and daily sun protection to complement your skin barrier.",
-              "button_label": "Explore Skincare",
-              "button_link": "shopify://collections/all"
-            }
-          },
-          "slide_3": {
-            "type": "slide",
-            "settings": {
-              "badge": "Beauty Combos",
-              "heading": "More of What You Love",
-              "subheading": "Discover thoughtfully paired skincare and grooming combinations with transparent bundle savings.",
-              "button_label": "Explore Combo Deals",
-              "button_link": "shopify://collections/all"
-            }
+  "sections": {
+    "section_a_hero": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "badge": "Your Beauty Essentials",
+            "heading": "Discover Your Everyday Glow",
+            "subheading": "Explore dermatologically inspired skincare and beauty essentials curated for your daily routine.",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/all"
           }
         },
-        "block_order": ["slide_1", "slide_2", "slide_3"],
-        "settings": {}
-      },
-      "section_b_categories": {
-        "type": "collection-list",
-        "blocks": {
-          "cat_women": { "type": "collection_item", "settings": { "custom_title": "Women", "custom_subtitle": "Daily skincare, body care & targeted treatments." } },
-          "cat_men": { "type": "collection_item", "settings": { "custom_title": "Men", "custom_subtitle": "Essential grooming, face wash & hydration." } },
-          "cat_sun": { "type": "collection_item", "settings": { "custom_title": "Sun Protection", "custom_subtitle": "Broad-spectrum UV defense with zero white cast." } },
-          "cat_baby": { "type": "collection_item", "settings": { "custom_title": "Mother & Baby", "custom_subtitle": "Gentle, fragrance-free care for delicate skin." } },
-          "cat_brands": { "type": "collection_item", "settings": { "custom_title": "Brands", "custom_subtitle": "Shop our directory of partner brands." } },
-          "cat_combos": { "type": "collection_item", "settings": { "custom_title": "Combo Deals", "custom_subtitle": "Curated routine sets with verified savings." } }
-        },
-        "block_order": ["cat_women", "cat_men", "cat_sun", "cat_baby", "cat_brands", "cat_combos"],
-        "settings": {
-          "eyebrow": "Curated Departments",
-          "heading": "Shop by Category",
-          "card_style": "overlay_tile",
-          "view_all_label": "Browse Full Catalogue"
-        }
-      },
-      "section_c_bestsellers": {
-        "type": "featured-collection",
-        "settings": {
-          "eyebrow": "Most Requested",
-          "heading": "Best Sellers",
-          "subheading": "Everyday formulations loved for visible results and effortless wear.",
-          "layout_mode": "standard_grid",
-          "products_to_show": 4,
-          "use_subtle_bg": true,
-          "view_all_label": "View All Best Sellers"
-        }
-      },
-      "section_d_featured_collections": {
-        "type": "collection-list",
-        "blocks": {
-          "spot_1": {
-            "type": "collection_item",
-            "settings": {
-              "custom_eyebrow": "Daily Actives & Hydration",
-              "custom_title": "Women's Beauty & Skincare",
-              "custom_subtitle": "Targeted serums and barrier-supportive moisturizers designed for luminous skin."
-            }
-          },
-          "spot_2": {
-            "type": "collection_item",
-            "settings": {
-              "custom_eyebrow": "Velvet Color & Finish",
-              "custom_title": "Make-up Essentials",
-              "custom_subtitle": "Breathable complexion formulas and multi-use lip and cheek tints."
-            }
-          },
-          "spot_3": {
-            "type": "collection_item",
-            "settings": {
-              "custom_eyebrow": "Broad-Spectrum UV Defense",
-              "custom_title": "Sun Protection",
-              "custom_subtitle": "Zero-white-cast fluid sunscreens formulated for daily tropical wear."
-            }
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "badge": "Skincare Collection",
+            "heading": "Care That Shows",
+            "subheading": "Find targeted serums, gentle cleansers, and daily sun protection to complement your skin barrier.",
+            "button_label": "Explore Skincare",
+            "button_link": "shopify://collections/all"
           }
         },
-        "block_order": ["spot_1", "spot_2", "spot_3"],
-        "settings": {
-          "eyebrow": "Targeted Routines",
-          "heading": "Featured Collections",
-          "subheading": "Thoughtfully organized skincare, sun care, and color cosmetics for every routine.",
-          "card_style": "editorial_card",
-          "view_all_label": ""
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "badge": "Beauty Combos",
+            "heading": "More of What You Love",
+            "subheading": "Discover thoughtfully paired skincare and grooming combinations with transparent bundle savings.",
+            "button_label": "Explore Combo Deals",
+            "button_link": "shopify://collections/all"
+          }
         }
       },
-      "section_e_brands": {
-        "type": "brand-list",
-        "settings": {
-          "eyebrow": "Official Retail Directory",
-          "heading": "Shop by Brand",
-          "subheading": "Explore authentic skincare and cosmetics from your favourite houses.",
-          "brands_display_limit": 25,
-          "view_all_label": "View All Brands"
+      "block_order": [
+        "slide_1",
+        "slide_2",
+        "slide_3"
+      ],
+      "settings": {}
+    },
+    "section_b_categories": {
+      "type": "collection-list",
+      "blocks": {
+        "cat_women": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Targeted Routine",
+            "custom_title": "Women",
+            "custom_subtitle": "Daily skincare, body care & targeted treatments.",
+            "custom_link": ""
+          }
+        },
+        "cat_men": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Targeted Routine",
+            "custom_title": "Men",
+            "custom_subtitle": "Essential grooming, face wash & hydration.",
+            "custom_link": ""
+          }
+        },
+        "cat_sun": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Targeted Routine",
+            "custom_title": "Sun Protection",
+            "custom_subtitle": "Broad-spectrum UV defense with zero white cast.",
+            "custom_link": ""
+          }
+        },
+        "cat_baby": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Targeted Routine",
+            "custom_title": "Mother & Baby",
+            "custom_subtitle": "Gentle, fragrance-free care for delicate skin.",
+            "custom_link": ""
+          }
+        },
+        "cat_brands": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Targeted Routine",
+            "custom_title": "Brands",
+            "custom_subtitle": "Shop our directory of partner brands.",
+            "custom_link": ""
+          }
+        },
+        "cat_combos": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Targeted Routine",
+            "custom_title": "Combo Deals",
+            "custom_subtitle": "Curated routine sets with verified savings.",
+            "custom_link": ""
+          }
         }
       },
-      "section_f_combo_deals": {
-        "type": "featured-collection",
-        "settings": {
-          "eyebrow": "Curated Routine Sets",
-          "heading": "Value Combo Deals",
-          "subheading": "Paired formulations with transparent bundle savings calculated from individual item prices.",
-          "layout_mode": "combo_bundles",
-          "products_to_show": 3,
-          "use_subtle_bg": false,
-          "view_all_label": "Explore All Combo Deals"
-        }
-      },
-      "section_g_promo_banner": {
-        "type": "promo-banner",
-        "settings": {
-          "badge": "Daily UV Defense Campaign",
-          "heading": "Protect Your Skin Barrier Every Single Morning",
-          "text": "Discover lightweight, invisible-finish SPF 50+ sunscreens and soothing after-sun care curated for year-round tropical sunshine.",
-          "primary_btn_label": "Shop Sun Protection",
-          "secondary_btn_label": "Explore Mother & Baby"
-        }
+      "block_order": [
+        "cat_women",
+        "cat_men",
+        "cat_sun",
+        "cat_baby",
+        "cat_brands",
+        "cat_combos"
+      ],
+      "settings": {
+        "eyebrow": "Curated Departments",
+        "heading": "Shop by Category",
+        "subheading": "",
+        "card_style": "overlay_tile",
+        "view_all_label": "Browse Full Catalogue",
+        "view_all_link": ""
       }
     },
-    "order": [
-      "section_a_hero",
-      "section_b_categories",
-      "section_c_bestsellers",
-      "section_d_featured_collections",
-      "section_e_brands",
-      "section_f_combo_deals",
-      "section_g_promo_banner"
-    ]
-  }
+    "section_c_bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Most Requested",
+        "heading": "Best Sellers",
+        "subheading": "Everyday formulations loved for visible results and effortless wear.",
+        "collection": "",
+        "layout_mode": "standard_grid",
+        "products_to_show": 4,
+        "use_subtle_bg": true,
+        "view_all_label": "View All Best Sellers"
+      }
+    },
+    "section_d_featured_collections": {
+      "type": "collection-list",
+      "blocks": {
+        "spot_1": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Daily Actives & Hydration",
+            "custom_title": "Women's Beauty & Skincare",
+            "custom_subtitle": "Targeted serums and barrier-supportive moisturizers designed for luminous skin.",
+            "custom_link": ""
+          }
+        },
+        "spot_2": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Velvet Color & Finish",
+            "custom_title": "Make-up Essentials",
+            "custom_subtitle": "Breathable complexion formulas and multi-use lip and cheek tints.",
+            "custom_link": ""
+          }
+        },
+        "spot_3": {
+          "type": "collection_item",
+          "settings": {
+            "collection": "",
+            "custom_eyebrow": "Broad-Spectrum UV Defense",
+            "custom_title": "Sun Protection",
+            "custom_subtitle": "Zero-white-cast fluid sunscreens formulated for daily tropical wear.",
+            "custom_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "spot_1",
+        "spot_2",
+        "spot_3"
+      ],
+      "settings": {
+        "eyebrow": "Targeted Routines",
+        "heading": "Featured Collections",
+        "subheading": "Thoughtfully organized skincare, sun care, and color cosmetics for every routine.",
+        "card_style": "editorial_card",
+        "view_all_label": "",
+        "view_all_link": ""
+      }
+    },
+    "section_f_combo_deals": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Curated Routine Sets",
+        "heading": "Value Combo Deals",
+        "subheading": "Paired formulations with transparent bundle savings calculated from individual item prices.",
+        "collection": "",
+        "layout_mode": "combo_bundles",
+        "products_to_show": 3,
+        "use_subtle_bg": false,
+        "view_all_label": "Explore All Combo Deals"
+      }
+    },
+    "section_g_promo_banner": {
+      "type": "promo-banner",
+      "settings": {
+        "badge": "Daily UV Defense Campaign",
+        "heading": "Protect Your Skin Barrier Every Single Morning",
+        "text": "Discover lightweight, invisible-finish SPF 50+ sunscreens and soothing after-sun care curated for year-round tropical sunshine.",
+        "primary_btn_label": "Shop Sun Protection",
+        "primary_btn_link": "",
+        "secondary_btn_label": "Explore Mother & Baby",
+        "secondary_btn_link": ""
+      }
+    }
+  },
+  "order": [
+    "section_a_hero",
+    "section_b_categories",
+    "section_c_bestsellers",
+    "section_d_featured_collections",
+    "section_f_combo_deals",
+    "section_g_promo_banner"
+  ]
+}
