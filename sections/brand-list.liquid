@@ -56,7 +56,7 @@
           <a
             href="{{ block.settings.link | default: routes.all_products_collection_url }}"
             data-brand-index="{{ forloop.index }}"
-            class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-4 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[92px] {% if forloop.index > display_limit %}hidden{% endif %}"
+            class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-4 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[100px] {% if forloop.index > display_limit %}hidden{% endif %}"
             {{ block.shopify_attributes }}
           >
             {%- if block.settings.logo != blank -%}
@@ -69,29 +69,51 @@
                 class="max-h-10 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
               >
             {%- else -%}
-              <span class="font-editorial text-lg font-bold text-[#222222] group-hover:text-[#C62828] tracking-wider">
-                BP{{ forloop.index | prepend: '0' | slice: -2, 2 }}
-              </span>
-              <span class="text-[11px] text-neutral-500 mt-1 font-medium truncate max-w-full">
+              <span class="font-editorial text-base font-bold text-[#222222] group-hover:text-[#C62828] tracking-wider">
                 {{ block.settings.brand_name | escape }}
               </span>
             {%- endif -%}
           </a>
         {%- endfor -%}
       {%- else -%}
-        {%- comment -%} Default 25 Replaceable Placeholders matching prototype {%- endcomment -%}
+        {%- comment -%} Default 25 Image Placeholders matching cosmetic brand aesthetic {%- endcomment -%}
         {%- for i in (1..25) -%}
           {%- assign num_padded = i | prepend: '0' | slice: -2, 2 -%}
+          {%- liquid
+            # Cycles through clean Unsplash beauty/skincare imagery for placeholders
+            case i
+              when 1 or 6 or 11 or 16 or 21
+                assign placeholder_img = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=300&q=80'
+                assign brand_title = 'Luxe Botanicals'
+              when 2 or 7 or 12 or 17 or 22
+                assign placeholder_img = 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&fit=crop&w=300&q=80'
+                assign brand_title = 'DermaCare Lab'
+              when 3 or 8 or 13 or 18 or 23
+                assign placeholder_img = 'https://images.unsplash.com/photo-1608248597359-0e6d526a6c18?auto=format&fit=crop&w=300&q=80'
+                assign brand_title = 'Aura Skincare'
+              when 4 or 9 or 14 or 19 or 24
+                assign placeholder_img = 'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=300&q=80'
+                assign brand_title = 'Pure Essentials'
+              else
+                assign placeholder_img = 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=300&q=80'
+                assign brand_title = 'Glow Studio'
+            endcase
+          -%}
           <a
             href="{{ routes.all_products_collection_url }}"
             data-brand-index="{{ i }}"
-            class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-4 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[92px] {% if i > display_limit %}hidden{% endif %}"
+            class="group bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-4 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[100px] {% if i > display_limit %}hidden{% endif %}"
           >
-            <span class="font-editorial text-lg font-bold text-[#222222] group-hover:text-[#C62828] tracking-wider">
-              BP{{ num_padded }}
-            </span>
-            <span class="text-[11px] text-neutral-500 mt-1 font-medium truncate max-w-full">
-              Brand Placeholder {{ num_padded }}
+            <img
+              src="{{ section.settings.default_placeholder_image | default: placeholder_img }}"
+              alt="Brand {{ num_padded }}"
+              loading="lazy"
+              width="100"
+              height="40"
+              class="max-h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+            >
+            <span class="text-[10px] text-neutral-400 mt-1.5 font-medium truncate max-w-full uppercase tracking-wider">
+              {{ brand_title }} {{ num_padded }}
             </span>
           </a>
         {%- endfor -%}
@@ -145,7 +167,13 @@
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
-      "default": "Replaceable brand placeholders configured for up to 25 partner brands."
+      "default": "Explore our curated portfolio of partner skincare and cosmetic brands."
+    },
+    {
+      "type": "text",
+      "id": "default_placeholder_image",
+      "label": "Default Placeholder Image URL (Optional)",
+      "info": "Paste an HTTPS image URL to replace all fallback logos at once."
     },
     {
       "type": "range",
@@ -177,7 +205,7 @@
           "type": "text",
           "id": "brand_name",
           "label": "Brand Name",
-          "default": "Brand Placeholder"
+          "default": "Brand Partner"
         },
         {
           "type": "image_picker",
