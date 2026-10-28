@@ -12,7 +12,7 @@
   endif
 -%}
 
-<article class="group bg-white border border-[#EAE4E4] rounded-sm flex flex-col justify-between overflow-hidden transition-shadow duration-300 hover:shadow-md">
+<article class="group bg-white border border-[#EAE4E4] hover:border-[#C62828]/50 rounded-sm flex flex-col justify-between overflow-hidden transition-all duration-300 hover:shadow-md">
   <div>
     <div class="relative aspect-[4/5] bg-[#FAF8F8] overflow-hidden">
       <a href="{{ product.url }}" class="block w-full h-full focus:outline-none" aria-label="{{ product.title | escape }}">
@@ -26,7 +26,14 @@
             class="product-card-img w-full h-full object-cover object-center"
           >
         {%- else -%}
-          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover text-neutral-300' }}
+          <img
+            src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80"
+            alt="{{ product.title | escape }}"
+            loading="lazy"
+            width="400"
+            height="500"
+            class="product-card-img w-full h-full object-cover object-center"
+          >
         {%- endif -%}
       </a>
 
@@ -45,13 +52,11 @@
     </div>
 
     <div class="p-3.5 sm:p-4">
-      {%- if product.vendor != blank -%}
-        <p class="text-[11px] uppercase tracking-widest text-neutral-500 font-medium mb-1 truncate">
-          {{ product.vendor }}
-        </p>
-      {%- endif -%}
+      <p class="text-[11px] uppercase tracking-widest text-neutral-500 font-medium mb-1 truncate">
+        {{ product.vendor | default: 'Vijay Traders' }}
+      </p>
 
-      <h3 class="text-sm sm:text-[15px] font-medium text-[#222222] leading-snug line-clamp-2 min-h-[2.5rem]">
+      <h3 class="font-editorial text-sm sm:text-base font-semibold text-[#222222] leading-snug line-clamp-2 min-h-[2.5rem]">
         <a href="{{ product.url }}" class="hover:text-[#C62828] transition-colors">
           {{ product.title }}
         </a>
@@ -78,7 +83,7 @@
           type="submit"
           class="w-full py-2.5 px-3 text-xs sm:text-sm font-semibold uppercase tracking-wider border border-[#C62828] text-[#C62828] bg-white hover:bg-[#C62828] hover:text-white active:bg-[#E53935] transition-colors rounded-sm focus:outline-none"
         >
-          {{ 'products.product.add_to_cart' | t }}
+          Add to Bag
         </button>
       </form>
     {%- else -%}
@@ -87,7 +92,7 @@
         disabled
         class="w-full py-2.5 px-3 text-xs sm:text-sm font-semibold uppercase tracking-wider border border-[#EAE4E4] text-neutral-400 bg-[#FAF8F8] rounded-sm cursor-not-allowed"
       >
-        {{ 'products.product.sold_out' | t }}
+        Sold Out
       </button>
     {%- endif -%}
   </div>

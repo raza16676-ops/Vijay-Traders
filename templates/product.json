@@ -1,21 +1,25 @@
 {
-    "sections": {
-      "main": {
-        "type": "main-product",
-        "settings": {}
-      },
-      "related_products": {
-        "type": "featured-collection",
-        "settings": {
-          "eyebrow": "Routine Pairing",
-          "heading": "You May Also Like",
-          "subheading": "Complementary formulations to complete your daily skincare and beauty routine.",
-          "layout_mode": "standard_grid",
-          "products_to_show": 4,
-          "use_subtle_bg": true,
-          "view_all_label": "View All"
-        }
-      }
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
     },
-    "order": ["main", "related_products"]
-  }
+    "you_may_also_like": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Routine Pairing",
+        "heading": "You May Also Like",
+        "subheading": "",
+        "layout_mode": "standard_grid",
+        "products_to_show": 4,
+        "use_subtle_bg": false,
+        "view_all_label": "View All"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "you_may_also_like"
+  ]
+}
+'@ | Out-File -Encoding utf8 templates/product.json
