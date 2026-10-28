@@ -18,9 +18,9 @@ module.exports = {
         neutralText: "#222222"
       },
       fontFamily: {
-        editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'sans-serif']
-      }
+        sans: ['Montserrat', 'sans-serif'],
+        editorial: ['Outfit', 'sans-serif'],
+      },
     }
   },
   plugins: []
