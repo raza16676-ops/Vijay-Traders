@@ -1,9 +1,11 @@
-{
-    "sections": {
-      "main": {
-        "type": "main-brands-page",
-        "settings": {}
-      }
-    },
-    "order": ["main"]
-  }
+﻿{
+  "sections": {
+    "main": {
+      "type": "main-brands-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
