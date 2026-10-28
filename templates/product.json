@@ -1,4 +1,3 @@
-$json = @'
 {
   "sections": {
     "main": {
@@ -23,15 +22,3 @@ $json = @'
     "you_may_also_like"
   ]
 }
-'@
-[System.IO.File]::WriteAllText("$PWD\templates\product.json", $json, (New-Object System.Text.UTF8Encoding($false)))
-
-# Also strip BOM from any other .json files in templates/, config/, and locales/ just in case:
-Get-ChildItem templates/*.json, config/*.json, locales/*.json | ForEach-Object {
-  $content = [System.IO.File]::ReadAllText($_.FullName)
-  [System.IO.File]::WriteAllText($_.FullName, $content, (New-Object System.Text.UTF8Encoding($false)))
-}
-
-git add .
-git commit -m "fix: strip UTF-8 BOM from templates/product.json and all JSON files"
-git push
