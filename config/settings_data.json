@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "Discover your beauty essentials — Curated skincare & cosmetics.",
+              "link": ""
+            }
+          },
+          "announcement-bar-1": {
+            "type": "announcement",
+            "settings": {
+              "text": "Shop your favourite brands in one place — Value Combo Deals available.",
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0",
+          "announcement-bar-1"
+        ],
+        "settings": {
+          "autoplay_speed": 5
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo": "shopify://shop_images/1b2a3eca-7fe5-4d23-abeb-16d28c381bd5.jpg"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "show_social_banner": true,
+          "social_eyebrow": "Connect With Us",
+          "social_heading": "Follow Vijay Traders on Social Media",
+          "social_subtext": "Stay updated on new beauty arrivals, routine guides, and seasonal combo promotions across our official channels.",
+          "brand_description": "Vijay Traders is your trusted destination for authentic skincare, cosmetics, sun protection, and family care essentials.",
+          "shop_menu_heading": "Shop Categories",
+          "shop_menu": "",
+          "support_menu_heading": "Customer Support",
+          "support_menu": "",
+          "newsletter_heading": "Beauty Dispatch",
+          "newsletter_subtext": "Subscribe for new product launches and curated bundle offers."
+        }
+      }
+    },
+    "content_for_index": []
+  }
+}
