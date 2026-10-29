@@ -19,6 +19,7 @@
         "brand_fyXFwB": {
           "type": "brand",
           "settings": {
+            "brand_image": "shopify://shop_images/download.png",
             "brand_name": "",
             "brand_link": "shopify://collections/derma-co"
           }
@@ -28,7 +29,7 @@
           "settings": {
             "brand_image": "shopify://shop_images/beminimalist_logo.jpg",
             "brand_name": "",
-            "brand_link": ""
+            "brand_link": "shopify://collections/minimalist"
           }
         }
       },
