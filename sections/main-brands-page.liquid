@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <!-- 25 Brand Directory Grid (Entire card & logo clickable) -->
+    <!-- 25 Brand Directory Grid (Always shows 25 slots, uses uploaded block data when available) -->
     <div id="FullBrandsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
       {%- for i in (1..25) -%}
         {%- assign block_index = i | minus: 1 -%}
@@ -37,14 +37,12 @@
         {%- assign num_padded = i | prepend: '0' | slice: -2, 2 -%}
         {%- assign fallback_name = 'Brand Placeholder ' | append: num_padded -%}
         {%- assign brand_name = current_block.settings.brand_name | default: fallback_name -%}
-        {%- assign brand_url = current_block.settings.brand_link | default: routes.all_products_collection_url -%}
 
-        <a
-          href="{{ brand_url }}"
+        <div
           data-brand-card
           data-brand-index="{{ i }}"
           data-brand-name="{{ brand_name | escape }}"
-          class="bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-5 flex flex-col items-center justify-between text-center transition-all duration-200 min-h-[190px] group cursor-pointer block"
+          class="bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-5 flex flex-col items-center justify-between text-center transition-all duration-200 min-h-[190px] group"
           {% if current_block %}{{ current_block.shopify_attributes }}{% endif %}
         >
           <div class="w-full flex justify-center flex-grow items-center">
@@ -67,11 +65,11 @@
           </div>
 
           <div class="w-full pt-3 mt-3 border-t border-[#EAE4E4]">
-            <span class="text-[11px] font-bold uppercase tracking-wider text-[#C62828] group-hover:underline block">
+            <a href="{{ current_block.settings.brand_link | default: routes.all_products_collection_url }}" class="text-[11px] font-bold uppercase tracking-wider text-[#C62828] hover:underline block">
               View Products &rarr;
-            </span>
+            </a>
           </div>
-        </a>
+        </div>
       {%- endfor -%}
     </div>
 
