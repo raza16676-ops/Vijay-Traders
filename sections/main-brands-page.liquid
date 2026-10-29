@@ -29,35 +29,49 @@
       </div>
     </div>
 
-    <!-- Brand Directory Grid -->
+    <!-- 25 Brand Directory Grid (Entire card & logo clickable) -->
     <div id="FullBrandsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-      {%- for block in section.blocks -%}
-        <div
+      {%- for i in (1..25) -%}
+        {%- assign block_index = i | minus: 1 -%}
+        {%- assign current_block = section.blocks[block_index] -%}
+        {%- assign num_padded = i | prepend: '0' | slice: -2, 2 -%}
+        {%- assign fallback_name = 'Brand Placeholder ' | append: num_padded -%}
+        {%- assign brand_name = current_block.settings.brand_name | default: fallback_name -%}
+        {%- assign brand_url = current_block.settings.brand_link | default: routes.all_products_collection_url -%}
+
+        <a
+          href="{{ brand_url }}"
           data-brand-card
-          data-brand-index="{{ forloop.index }}"
-          data-brand-name="{{ block.settings.brand_name | escape }}"
-          class="bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-5 flex flex-col items-center justify-between text-center transition-all duration-200 min-h-[190px] group"
-          {{ block.shopify_attributes }}
+          data-brand-index="{{ i }}"
+          data-brand-name="{{ brand_name | escape }}"
+          class="bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-5 flex flex-col items-center justify-between text-center transition-all duration-200 min-h-[190px] group cursor-pointer block"
+          {% if current_block %}{{ current_block.shopify_attributes }}{% endif %}
         >
           <div class="w-full flex justify-center flex-grow items-center">
-            {%- if block.settings.brand_image != blank -%}
+            {%- if current_block != blank and current_block.settings.brand_image != blank -%}
               <img 
-                src="{{ block.settings.brand_image | img_url: 'medium' }}" 
-                alt="{{ block.settings.brand_name | escape }}"
+                src="{{ current_block.settings.brand_image | image_url: width: 300 }}" 
+                alt="{{ brand_name | escape }}"
                 class="max-h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 loading="lazy"
               >
             {%- else -%}
-              <!-- Fallback if no image is uploaded -->
-              <span class="text-xs font-bold text-[#C62828] tracking-widest uppercase">BP{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+              <div class="my-auto py-3">
+                <span class="text-xs font-bold text-[#C62828] tracking-widest uppercase block mb-2">BP{{ num_padded }}</span>
+                <h3 class="font-editorial text-base font-semibold text-[#222222] group-hover:text-[#C62828] transition-colors">
+                  {{ brand_name }}
+                </h3>
+                <p class="text-[11px] text-neutral-500 mt-1">Daily Essentials</p>
+              </div>
             {%- endif -%}
           </div>
+
           <div class="w-full pt-3 mt-3 border-t border-[#EAE4E4]">
-            <a href="{{ block.settings.brand_link | default: routes.all_products_collection_url }}" class="text-[11px] font-bold uppercase tracking-wider text-[#C62828] hover:underline block">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#C62828] group-hover:underline block">
               View Products &rarr;
-            </a>
+            </span>
           </div>
-        </div>
+        </a>
       {%- endfor -%}
     </div>
 
@@ -74,7 +88,7 @@
       searchInput?.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         cards.forEach(card => {
-          const name = card.getAttribute('data-brand-name').toLowerCase();
+          const name = (card.getAttribute('data-brand-name') || '').toLowerCase();
           const idx = parseInt(card.getAttribute('data-brand-index'), 10);
           const matchesSearch = name.includes(term);
           const withinLimit = idx <= currentLimit;
@@ -90,7 +104,7 @@
 
           cards.forEach(card => {
             const idx = parseInt(card.getAttribute('data-brand-index'), 10);
-            const name = card.getAttribute('data-brand-name').toLowerCase();
+            const name = (card.getAttribute('data-brand-name') || '').toLowerCase();
             const matchesSearch = name.includes(term);
             const withinLimit = idx <= currentLimit;
             card.classList.toggle('hidden', !(matchesSearch && withinLimit));
@@ -99,7 +113,7 @@
           viewBtns.forEach(b => {
             const active = b === btn;
             b.className = 'px-3.5 py-1.5 text-xs font-semibold rounded-sm transition-colors ' +
-              (active ? 'bg-[#C62828] text-white' : 'bg-white border border-[#EAE4E4] text-[#222222]');
+              (active ? 'bg-[#C62828] text-white' : 'bg-white border border-[#EAE4E4] text-[#222222] hover:border-[#C62828]');
           });
         });
       });
@@ -111,6 +125,7 @@
 {
   "name": "Brands Directory",
   "settings": [],
+  "max_blocks": 25,
   "blocks": [
     {
       "type": "brand",
@@ -124,7 +139,7 @@
         {
           "type": "text",
           "id": "brand_name",
-          "label": "Brand Name (for search filtering)"
+          "label": "Brand Name (for search & alt text)"
         },
         {
           "type": "url",
