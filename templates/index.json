@@ -59,7 +59,7 @@
         "cat_women": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "women",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Women",
             "custom_subtitle": "Daily skincare, body care & targeted treatments.",
@@ -69,7 +69,7 @@
         "cat_men": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "men",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Men",
             "custom_subtitle": "Essential grooming, face wash & hydration.",
@@ -79,7 +79,7 @@
         "cat_sun": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "sunscreen",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Sun Protection",
             "custom_subtitle": "Broad-spectrum UV defense with zero white cast.",
@@ -89,7 +89,7 @@
         "cat_baby": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "mother-and-baby",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Mother & Baby",
             "custom_subtitle": "Gentle, fragrance-free care for delicate skin.",
@@ -103,13 +103,13 @@
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Brands",
             "custom_subtitle": "Shop our directory of partner brands.",
-            "custom_link": ""
+            "custom_link": "shopify://pages/brands"
           }
         },
         "cat_combos": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "combo-deals",
             "custom_image": "shopify://shop_images/bundle-promotional_block_e35baf70-a595-4051-80da-49ff1a5e7eca.webp",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Combo Deals",
