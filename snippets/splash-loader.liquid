@@ -1,0 +1,45 @@
+<div id="VijayLoader" class="fixed inset-0 z-[99999] bg-[#FAF8F8] flex flex-col items-center justify-center transition-opacity duration-700 ease-in-out">
+  <div class="text-center px-4">
+    <!-- Animated Glow / Logo Badge -->
+    <div class="relative w-20 h-20 mx-auto mb-6 flex items-center justify-center bg-white border border-[#EAE4E4] rounded-sm shadow-sm">
+      <div class="absolute inset-0 rounded-sm border-2 border-[#C62828] animate-ping opacity-20"></div>
+      <span class="font-editorial text-2xl font-bold text-[#C62828] tracking-wider">VT</span>
+    </div>
+
+    <!-- Brand Header -->
+    <h1 class="font-editorial text-2xl sm:text-3xl font-semibold text-[#222222] tracking-tight">
+      VIJAY TRADERS
+    </h1>
+    <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-neutral-500 mt-1">
+      Cosmetics & Skincare
+    </p>
+
+    <!-- Sleek Loading Bar -->
+    <div class="w-48 h-0.5 bg-[#EAE4E4] mx-auto mt-8 relative overflow-hidden rounded-full">
+      <div class="absolute inset-y-0 left-0 bg-[#C62828] animate-[loaderSlide_1.5s_cubic-bezier(0.65,0,0.35,1)_infinite]"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes loaderSlide {
+    0% { width: 0%; left: 0%; }
+    50% { width: 70%; left: 15%; }
+    100% { width: 0%; left: 100%; }
+  }
+</style>
+
+<script>
+  window.addEventListener('load', function() {
+    const loader = document.getElementById('VijayLoader');
+    if (!loader) return;
+    
+    // Smooth fade out after page assets load
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 700);
+    }, 600);
+  });
+</script>
