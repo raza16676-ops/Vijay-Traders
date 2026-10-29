@@ -19,6 +19,7 @@
         "brand_TgnkQX": {
           "type": "brand",
           "settings": {
+            "brand_image": "shopify://shop_images/Aromamagic-logo-web.avif",
             "brand_name": "",
             "brand_link": "shopify://collections/aroma-magic"
           }
@@ -26,22 +27,25 @@
         "brand_UUd8yK": {
           "type": "brand",
           "settings": {
+            "brand_image": "shopify://shop_images/download_55a59db7-c492-4a0c-948a-c862155b2087.png",
             "brand_name": "",
-            "brand_link": ""
+            "brand_link": "shopify://collections/bare-anatomy"
           }
         },
         "brand_8yaj36": {
           "type": "brand",
           "settings": {
+            "brand_image": "shopify://shop_images/logo-svg.webp",
             "brand_name": "",
-            "brand_link": ""
+            "brand_link": "shopify://collections/biotique"
           }
         },
         "brand_jEfACG": {
           "type": "brand",
           "settings": {
+            "brand_image": "shopify://shop_images/images.jpg",
             "brand_name": "",
-            "brand_link": ""
+            "brand_link": "shopify://collections/blue-heaven"
           }
         },
         "brand_GtdeVB": {
