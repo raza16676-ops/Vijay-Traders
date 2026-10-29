@@ -38,9 +38,7 @@
       },
       "header": {
         "type": "header",
-        "settings": {
-          "logo": "shopify://shop_images/1b2a3eca-7fe5-4d23-abeb-16d28c381bd5.jpg"
-        }
+        "settings": {}
       },
       "footer": {
         "type": "footer",
