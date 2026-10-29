@@ -204,7 +204,7 @@
         "eyebrow": "Curated Routine Sets",
         "heading": "Value Combo Deals",
         "subheading": "Paired formulations with transparent bundle savings calculated from individual item prices.",
-        "collection": "",
+        "collection": "combo-deals",
         "layout_mode": "combo_bundles",
         "products_to_show": 3,
         "use_subtle_bg": true,
