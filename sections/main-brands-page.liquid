@@ -29,27 +29,31 @@
       </div>
     </div>
 
-    <!-- 25 Brand Directory Grid -->
+    <!-- Brand Directory Grid -->
     <div id="FullBrandsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-      {%- for i in (1..25) -%}
-        {%- assign num_padded = i | prepend: '0' | slice: -2, 2 -%}
+      {%- for block in section.blocks -%}
         <div
           data-brand-card
-          data-brand-index="{{ i }}"
-          data-brand-name="Brand Placeholder {{ num_padded }}"
+          data-brand-index="{{ forloop.index }}"
+          data-brand-name="{{ block.settings.brand_name | escape }}"
           class="bg-white border border-[#EAE4E4] hover:border-[#C62828] rounded-sm p-5 flex flex-col items-center justify-between text-center transition-all duration-200 min-h-[190px] group"
+          {{ block.shopify_attributes }}
         >
-          <div class="w-full flex justify-center">
-            <span class="text-xs font-bold text-[#C62828] tracking-widest uppercase">BP{{ num_padded }}</span>
+          <div class="w-full flex justify-center flex-grow items-center">
+            {%- if block.settings.brand_image != blank -%}
+              <img 
+                src="{{ block.settings.brand_image | img_url: 'medium' }}" 
+                alt="{{ block.settings.brand_name | escape }}"
+                class="max-h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              >
+            {%- else -%}
+              <!-- Fallback if no image is uploaded -->
+              <span class="text-xs font-bold text-[#C62828] tracking-widest uppercase">BP{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            {%- endif -%}
           </div>
-          <div class="my-auto py-3">
-            <h3 class="font-editorial text-lg font-semibold text-[#222222] group-hover:text-[#C62828] transition-colors">
-              Brand Placeholder {{ num_padded }}
-            </h3>
-            <p class="text-[11px] text-neutral-500 mt-1">Daily Essentials</p>
-          </div>
-          <div class="w-full pt-3 border-t border-[#EAE4E4]">
-            <a href="{{ routes.all_products_collection_url }}" class="text-[11px] font-bold uppercase tracking-wider text-[#C62828] hover:underline block">
+          <div class="w-full pt-3 mt-3 border-t border-[#EAE4E4]">
+            <a href="{{ block.settings.brand_link | default: routes.all_products_collection_url }}" class="text-[11px] font-bold uppercase tracking-wider text-[#C62828] hover:underline block">
               View Products &rarr;
             </a>
           </div>
@@ -106,6 +110,34 @@
 {% schema %}
 {
   "name": "Brands Directory",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "brand_image",
+          "label": "Brand Logo/Image"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name (for search filtering)"
+        },
+        {
+          "type": "url",
+          "id": "brand_link",
+          "label": "Brand Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brands Directory"
+    }
+  ]
 }
 {% endschema %}
