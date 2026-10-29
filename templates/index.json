@@ -215,10 +215,9 @@
         "badge": "Daily UV Defense Campaign",
         "heading": "Protect Your Skin Barrier Every Single Morning",
         "text": "Discover lightweight, invisible-finish SPF 50+ sunscreens and soothing after-sun care curated for year-round tropical sunshine.",
+        "image": "shopify://shop_images/Sunscreens_and_fruit_banner_design_ce9b12e9_2K.jpg",
         "primary_btn_label": "Shop Sun Protection",
-        "primary_btn_link": "",
-        "secondary_btn_label": "Explore Mother & Baby",
-        "secondary_btn_link": ""
+        "primary_btn_link": ""
       }
     }
   },
