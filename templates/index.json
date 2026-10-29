@@ -144,7 +144,7 @@
         "collection": "",
         "layout_mode": "standard_grid",
         "products_to_show": 4,
-        "use_subtle_bg": true,
+        "use_subtle_bg": false,
         "view_all_label": "View All Best Sellers"
       }
     },
@@ -154,7 +154,8 @@
         "spot_1": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "women",
+            "custom_image": "shopify://shop_images/Screenshot_2026-10-30_021437.png",
             "custom_eyebrow": "Daily Actives & Hydration",
             "custom_title": "Women's Beauty & Skincare",
             "custom_subtitle": "Targeted serums and barrier-supportive moisturizers designed for luminous skin.",
@@ -164,7 +165,7 @@
         "spot_2": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "make-up-collection",
             "custom_eyebrow": "Velvet Color & Finish",
             "custom_title": "Make-up Essentials",
             "custom_subtitle": "Breathable complexion formulas and multi-use lip and cheek tints.",
@@ -174,7 +175,8 @@
         "spot_3": {
           "type": "collection_item",
           "settings": {
-            "collection": "",
+            "collection": "sunscreen",
+            "custom_image": "shopify://shop_images/AdobeStock_613418555.jpg",
             "custom_eyebrow": "Broad-Spectrum UV Defense",
             "custom_title": "Sun Protection",
             "custom_subtitle": "Zero-white-cast fluid sunscreens formulated for daily tropical wear.",
@@ -205,7 +207,7 @@
         "collection": "",
         "layout_mode": "combo_bundles",
         "products_to_show": 3,
-        "use_subtle_bg": false,
+        "use_subtle_bg": true,
         "view_all_label": "Explore All Combo Deals"
       }
     },
@@ -217,7 +219,7 @@
         "text": "Discover lightweight, invisible-finish SPF 50+ sunscreens and soothing after-sun care curated for year-round tropical sunshine.",
         "image": "shopify://shop_images/Sunscreens_and_fruit_banner_design_ce9b12e9_2K.jpg",
         "primary_btn_label": "Shop Sun Protection",
-        "primary_btn_link": ""
+        "primary_btn_link": "shopify://collections"
       }
     }
   },
