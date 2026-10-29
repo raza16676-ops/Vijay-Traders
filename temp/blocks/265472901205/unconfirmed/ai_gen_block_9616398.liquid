@@ -1,0 +1,142 @@
+{% doc %}
+  @prompt
+    a brand image placeholder
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-brand-placeholder-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    color: {{ block.settings.text_color }};
+    text-align: center;
+  }
+
+  .ai-brand-placeholder__frame-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid {{ block.settings.border_color }};
+    border-radius: {{ block.settings.corner_radius }}px;
+    background: {{ block.settings.background_color }};
+  }
+
+  .ai-brand-placeholder__frame-{{ ai_gen_id }} img,
+  .ai-brand-placeholder__frame-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  .ai-brand-placeholder__frame-{{ ai_gen_id }} svg {
+    padding: 22%;
+    color: {{ block.settings.placeholder_color }};
+  }
+
+  .ai-brand-placeholder__label-{{ ai_gen_id }} {
+    margin: 10px 0 0;
+    color: {{ block.settings.text_color }};
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+{% endstyle %}
+
+<div class="ai-brand-placeholder-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-brand-placeholder__frame-{{ ai_gen_id }}">
+    {% if block.settings.brand_image != blank %}
+      <img
+        src="{{ block.settings.brand_image | image_url: width: 900 }}"
+        alt="{{ block.settings.brand_name | default: block.settings.brand_image.alt | escape }}"
+        loading="lazy"
+        width="{{ block.settings.brand_image.width }}"
+        height="{{ block.settings.brand_image.height }}"
+      >
+    {% else %}
+      {{ 'image' | placeholder_svg_tag }}
+    {% endif %}
+  </div>
+  {% if block.settings.brand_name != blank %}
+    <p class="ai-brand-placeholder__label-{{ ai_gen_id }}">{{ block.settings.brand_name | escape }}</p>
+  {% elsif block.settings.brand_image == blank %}
+    <p class="ai-brand-placeholder__label-{{ ai_gen_id }}">Add a brand logo in the block settings</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Brand image placeholder",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Brand image"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border",
+      "default": "#DDDDDD"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder graphic",
+      "default": "#777777"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#222222"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand image placeholder"
+    }
+  ],
+  "tag": null,
+  "class": "brand-image-placeholder-block"
+}
+{% endschema %}
