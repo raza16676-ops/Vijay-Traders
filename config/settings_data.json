@@ -9,6 +9,13 @@
  */
 {
   "current": {
+    "contact_phone_display": "+94 74 205 5947",
+    "contact_phone_tel": "+94742055947",
+    "whatsapp_number": "94742055947",
+    "store_address": "85 A.G. Hinniappuhamy Mawatha, Colombo 01300, Sri Lanka.",
+    "store_hours": "Mon – Sun: 9:00 AM – 8:00 PM",
+    "social_facebook_link": "https://www.facebook.com/share/1cvtV3AcLu/",
+    "social_instagram_link": "https://www.instagram.com/vijaytraders00?mdxt=aDhlOHl2ZWdjZTZ0",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -57,6 +64,21 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "2950567246721570496": {
+        "type": "shopify://apps/tabs-studio/blocks/global_embed_block/19980fb9-f2ca-4ada-ad36-c0364c3318b8",
+        "disabled": false,
+        "settings": {
+          "location": "auto",
+          "init_type": "default",
+          "init_selector": "",
+          "replace_contents": false,
+          "init_timing": "immediate",
+          "custom_script": "",
+          "custom_style": ""
+        }
+      }
+    }
   }
 }
