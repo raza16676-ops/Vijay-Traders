@@ -77,3 +77,120 @@ html {
     transform: none;
   }
 }
+/* ==========================================================================
+   Shopify System Policy Pages (/policies/privacy-policy, refund-policy, etc.)
+   ========================================================================== */
+   main:has(.shopify-policy__container) {
+    background-color: #FAF8F8;
+    padding: 3rem 1rem 4rem;
+  }
+  
+  .shopify-policy__container {
+    max-width: 56rem !important; /* 896px (matches max-w-4xl) */
+    margin: 0 auto !important;
+    background-color: #FFFFFF;
+    border: 1px solid #EAE4E4;
+    border-radius: 2px;
+    padding: 2rem 1.5rem !important;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  }
+  
+  @media (min-width: 640px) {
+    .shopify-policy__container {
+      padding: 3rem 3.5rem !important;
+    }
+  }
+  
+  .shopify-policy__title {
+    text-align: left !important;
+    border-bottom: 1px solid #EAE4E4;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .shopify-policy__title::before {
+    content: "VIJAY TRADERS OFFICIAL POLICY";
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #C62828;
+    margin-bottom: 0.35rem;
+  }
+  
+  .shopify-policy__title h1 {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 2.25rem !important;
+    line-height: 1.2 !important;
+    font-weight: 600 !important;
+    color: #222222 !important;
+    letter-spacing: -0.015em;
+    margin: 0 !important;
+  }
+  
+  .shopify-policy__body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: #404040;
+  }
+  
+  .shopify-policy__body h1,
+  .shopify-policy__body h2,
+  .shopify-policy__body h3,
+  .shopify-policy__body h4 {
+    font-family: 'Outfit', sans-serif;
+    color: #222222;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  
+  .shopify-policy__body h2 {
+    font-size: 1.35rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid #EAE4E4;
+  }
+  
+  .shopify-policy__body h3 {
+    font-size: 1.125rem;
+  }
+  
+  .shopify-policy__body p {
+    margin-bottom: 1.15rem;
+  }
+  
+  .shopify-policy__body ul,
+  .shopify-policy__body ol {
+    margin: 1rem 0 1.5rem 1.25rem;
+    padding-left: 0.5rem;
+  }
+  
+  .shopify-policy__body ul {
+    list-style-type: disc;
+  }
+  
+  .shopify-policy__body li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .shopify-policy__body li::marker {
+    color: #C62828;
+  }
+  
+  .shopify-policy__body strong {
+    color: #222222;
+    font-weight: 600;
+  }
+  
+  .shopify-policy__body a {
+    color: #C62828;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  
+  .shopify-policy__body a:hover {
+    color: #E53935;
+  }
