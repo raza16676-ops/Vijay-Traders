@@ -15,6 +15,27 @@
     },
     "main": {
       "type": "main-brands-page",
+      "blocks": {
+        "brand_fyXFwB": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_eUPY3w": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/beminimalist_logo.jpg",
+            "brand_name": "",
+            "brand_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "brand_fyXFwB",
+        "brand_eUPY3w"
+      ],
       "settings": {}
     }
   },
