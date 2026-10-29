@@ -16,6 +16,167 @@
     "main": {
       "type": "main-brands-page",
       "blocks": {
+        "brand_TgnkQX": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": "shopify://collections/aroma-magic"
+          }
+        },
+        "brand_UUd8yK": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_8yaj36": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_jEfACG": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_GtdeVB": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_eYxYEg": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_6h6KjA": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_HJ9Enh": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_kirA4r": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_cPUQAp": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_aiBMBN": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_AqeCEy": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_4eeXLa": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_b8wEgW": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_w4trAa": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_Q6XrLh": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_AN4xzy": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_47ptiR": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_kiWrYK": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_Ga8dGc": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_YABqe7": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_cQCFbt": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
+        "brand_cmBQcn": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
+        },
         "brand_fyXFwB": {
           "type": "brand",
           "settings": {
@@ -34,6 +195,29 @@
         }
       },
       "block_order": [
+        "brand_TgnkQX",
+        "brand_UUd8yK",
+        "brand_8yaj36",
+        "brand_jEfACG",
+        "brand_GtdeVB",
+        "brand_eYxYEg",
+        "brand_6h6KjA",
+        "brand_HJ9Enh",
+        "brand_kirA4r",
+        "brand_cPUQAp",
+        "brand_aiBMBN",
+        "brand_AqeCEy",
+        "brand_4eeXLa",
+        "brand_b8wEgW",
+        "brand_w4trAa",
+        "brand_Q6XrLh",
+        "brand_AN4xzy",
+        "brand_47ptiR",
+        "brand_kiWrYK",
+        "brand_Ga8dGc",
+        "brand_YABqe7",
+        "brand_cQCFbt",
+        "brand_cmBQcn",
         "brand_fyXFwB",
         "brand_eUPY3w"
       ],
