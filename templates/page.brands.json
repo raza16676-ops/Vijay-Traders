@@ -131,72 +131,81 @@
         "brand_w4trAa": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_d84ee72b-de57-4d14-ab9e-c8bddb0c6aa0.jpg",
+            "brand_name": "Fogg",
+            "brand_link": "shopify://collections/fogg"
           }
         },
         "brand_Q6XrLh": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_58244f78-9893-4568-8345-0540bdae0c33.jpg",
+            "brand_name": "Foxtale",
+            "brand_link": "shopify://collections/foxtale"
           }
         },
         "brand_AN4xzy": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/garnier-logo-png_seeklogo-349688.png",
+            "brand_name": "Garnier",
+            "brand_link": "shopify://collections/garnier"
           }
         },
         "brand_47ptiR": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/himalaya-logo.jpg",
+            "brand_name": "Himalaya",
+            "brand_link": "shopify://collections/himalaya"
           }
         },
         "brand_kiWrYK": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_bb2c344c-5af5-4a48-a095-094b322414c8.png",
+            "brand_name": "Insight",
+            "brand_link": "shopify://collections/insight"
           }
         },
         "brand_Ga8dGc": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/Group_238.webp",
+            "brand_name": "Joves Herbal",
+            "brand_link": "shopify://collections/joves-herbal"
           }
         },
         "brand_YABqe7": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/66a70971713959.Y3JvcCw2NDgsNTA3LDM2Niw5OQ.jpg",
+            "brand_name": "Lacto Calamine",
+            "brand_link": "shopify://collections/lacto-calamine"
           }
         },
         "brand_cQCFbt": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_bf7376f7-80a4-4bd1-93e9-c132505452db.png",
+            "brand_name": "Lakme",
+            "brand_link": "shopify://collections/lakme"
           }
         },
         "brand_cmBQcn": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_01b36bc3-9aa8-4f3f-9504-356cdd9315de.png",
+            "brand_name": "Mama Earth",
+            "brand_link": "shopify://collections/mama-earth"
           }
         },
         "brand_fyXFwB": {
           "type": "brand",
           "settings": {
-            "brand_image": "shopify://shop_images/download.png",
+            "brand_image": "shopify://shop_images/images_9f316996-cdea-4457-acf1-cea83300e7d2.png",
             "brand_name": "",
-            "brand_link": "shopify://collections/derma-co"
+            "brand_link": "shopify://collections/mars"
           }
         },
         "brand_eUPY3w": {
