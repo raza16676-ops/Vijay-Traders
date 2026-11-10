@@ -20,7 +20,7 @@
           "type": "brand",
           "settings": {
             "brand_image": "shopify://shop_images/Aromamagic-logo-web.avif",
-            "brand_name": "",
+            "brand_name": "Aroma Magic",
             "brand_link": "shopify://collections/aroma-magic"
           }
         },
@@ -28,7 +28,7 @@
           "type": "brand",
           "settings": {
             "brand_image": "shopify://shop_images/download_55a59db7-c492-4a0c-948a-c862155b2087.png",
-            "brand_name": "",
+            "brand_name": "Bare Anatomy",
             "brand_link": "shopify://collections/bare-anatomy"
           }
         },
@@ -36,7 +36,7 @@
           "type": "brand",
           "settings": {
             "brand_image": "shopify://shop_images/logo-svg.webp",
-            "brand_name": "",
+            "brand_name": "Biotique",
             "brand_link": "shopify://collections/biotique"
           }
         },
@@ -44,13 +44,14 @@
           "type": "brand",
           "settings": {
             "brand_image": "shopify://shop_images/images.jpg",
-            "brand_name": "",
+            "brand_name": "Blue Heaven",
             "brand_link": "shopify://collections/blue-heaven"
           }
         },
         "brand_GtdeVB": {
           "type": "brand",
           "settings": {
+            "brand_image": "shopify://shop_images/chemist-at-play.webp",
             "brand_name": "Chemist At Play",
             "brand_link": "shopify://collections/chemist-at-play"
           }
@@ -58,64 +59,73 @@
         "brand_eYxYEg": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images.png",
+            "brand_name": "Colgate",
+            "brand_link": "shopify://collections/colgate"
           }
         },
         "brand_6h6KjA": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/27a299127502441.Y3JvcCwyMDg0LDE2MzAsMCwyMjY.png",
+            "brand_name": "Deconstruct",
+            "brand_link": "shopify://collections/deconstruct"
           }
         },
         "brand_HJ9Enh": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/download.png",
+            "brand_name": "The Derma Doc",
+            "brand_link": "shopify://collections/derma-co"
           }
         },
         "brand_kirA4r": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_7b0faf1e-5aa3-414f-a723-e9711d4680a2.jpg",
+            "brand_name": "DermDoc",
+            "brand_link": "shopify://collections/dermdoc"
           }
         },
         "brand_cPUQAp": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/52a44c8970f3f1c584b9698a62c90d6b.jpg",
+            "brand_name": "Dot and Key",
+            "brand_link": "shopify://collections/dot-key"
           }
         },
         "brand_aiBMBN": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/0cd77fa4485dacf2caaf91514ad956b02f7be4cc.png",
+            "brand_name": "Dr. Sheth",
+            "brand_link": "shopify://collections/dr-sheth"
           }
         },
         "brand_AqeCEy": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_a46ea5cc-5708-4528-8c3d-1c7422ea98c5.jpg",
+            "brand_name": "Faces Canada",
+            "brand_link": "shopify://collections/faces-canada"
           }
         },
         "brand_4eeXLa": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_2efec2e0-092e-42f8-b633-ef54e2af197b.png",
+            "brand_name": "Fair and Lovely",
+            "brand_link": "shopify://collections/fair-lovely"
           }
         },
         "brand_b8wEgW": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_5a6c3c3a-3f20-45fe-9cbc-918799f19292.png",
+            "brand_name": "Fix Derma",
+            "brand_link": "shopify://collections/fix-derma"
           }
         },
         "brand_w4trAa": {
