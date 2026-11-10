@@ -223,6 +223,109 @@
             "brand_name": "Nivea",
             "brand_link": "shopify://collections/nivea"
           }
+        },
+        "brand_gDcxxW": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_1bd61403-9b18-4b85-a2a4-7773e2a95f31.png",
+            "brand_name": "Olay",
+            "brand_link": "shopify://collections/olay"
+          }
+        },
+        "brand_XYAdd9": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_f4706c01-0715-454f-964e-88d429bb5f47.png",
+            "brand_name": "Park Avenue",
+            "brand_link": "shopify://collections/park-avenue"
+          }
+        },
+        "brand_RGDN8b": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_4076fe41-730c-4dd7-89de-34b5c80913fc.png",
+            "brand_name": "Pilgrim",
+            "brand_link": "shopify://collections/pilgrim"
+          }
+        },
+        "brand_yjJg3L": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_d8cf1d35-d7d8-4723-878c-a3b57a5d6657.png",
+            "brand_name": "Plix",
+            "brand_link": "shopify://collections/plix"
+          }
+        },
+        "brand_z7hWzB": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_f85ea7e6-3d36-4373-b2c9-ebfd18b2ca44.png",
+            "brand_name": "Plum",
+            "brand_link": "shopify://collections/plum"
+          }
+        },
+        "brand_L7TrwE": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_50add259-49c9-4068-a397-19a2b3fd5de6.jpg",
+            "brand_name": "Ponds",
+            "brand_link": "shopify://collections/ponds"
+          }
+        },
+        "brand_6MTRwA": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_552c9c59-4c9c-4820-9440-a646d3d45ae5.jpg",
+            "brand_name": "Reginald Men",
+            "brand_link": "shopify://collections/reginald-men"
+          }
+        },
+        "brand_ffRi4y": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_302bb7f9-0e84-4538-9224-b73e2a275429.png",
+            "brand_name": "SebaMed",
+            "brand_link": "shopify://collections/sebamed"
+          }
+        },
+        "brand_f89bqY": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_f50e8e4b-f08c-449e-8f0a-1eea2b199d90.jpg",
+            "brand_name": "Streax",
+            "brand_link": "shopify://collections/streax"
+          }
+        },
+        "brand_qAr8TK": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_583e8f4a-1ce4-49e0-960b-75856b3c0c05.jpg",
+            "brand_name": "Sun Scoop",
+            "brand_link": "shopify://collections/sunscoop"
+          }
+        },
+        "brand_hgQRDG": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/rXFr96Fe_400x400_74769f41-087c-43da-aabc-552d2bfda886.jpg",
+            "brand_name": "Swiss Beauty",
+            "brand_link": "shopify://collections/swiss-beauty"
+          }
+        },
+        "brand_PY87hk": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_50083791-5516-41ee-b87a-9632ca1b57ec.jpg",
+            "brand_name": "VI JOHN",
+            "brand_link": "shopify://collections/vi-john"
+          }
+        },
+        "brand_QCamgW": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
         }
       },
       "block_order": [
@@ -251,7 +354,20 @@
         "brand_cmBQcn",
         "brand_fyXFwB",
         "brand_eUPY3w",
-        "brand_LqEeCC"
+        "brand_LqEeCC",
+        "brand_gDcxxW",
+        "brand_XYAdd9",
+        "brand_RGDN8b",
+        "brand_yjJg3L",
+        "brand_z7hWzB",
+        "brand_L7TrwE",
+        "brand_6MTRwA",
+        "brand_ffRi4y",
+        "brand_f89bqY",
+        "brand_qAr8TK",
+        "brand_hgQRDG",
+        "brand_PY87hk",
+        "brand_QCamgW"
       ],
       "settings": {}
     }
