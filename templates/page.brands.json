@@ -323,8 +323,17 @@
         "brand_QCamgW": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_1beca238-954d-4671-b9aa-78010c2b45bb.png",
+            "brand_name": "Wild Stone",
+            "brand_link": "shopify://collections/wild-stone"
+          }
+        },
+        "brand_xxjx4A": {
+          "type": "brand",
+          "settings": {
+            "brand_image": "shopify://shop_images/images_2c652e91-0190-4875-a8b9-390f09a348a4.png",
+            "brand_name": "WishCare",
+            "brand_link": "shopify://collections/wishcare"
           }
         }
       },
@@ -367,7 +376,8 @@
         "brand_qAr8TK",
         "brand_hgQRDG",
         "brand_PY87hk",
-        "brand_QCamgW"
+        "brand_QCamgW",
+        "brand_xxjx4A"
       ],
       "settings": {}
     }
