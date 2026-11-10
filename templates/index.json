@@ -165,10 +165,11 @@
         "spot_2": {
           "type": "collection_item",
           "settings": {
-            "collection": "make-up-collection",
-            "custom_eyebrow": "Velvet Color & Finish",
-            "custom_title": "Make-up Essentials",
-            "custom_subtitle": "Breathable complexion formulas and multi-use lip and cheek tints.",
+            "collection": "lip-care",
+            "custom_image": "shopify://shop_images/istockphoto-1361579752-612x612.jpg",
+            "custom_eyebrow": "Nourishing & Protective",
+            "custom_title": "Lip Care",
+            "custom_subtitle": "Discover our targeted balms and treatments formulated to protect against dryness and restore smooth, supple lips.",
             "custom_link": ""
           }
         },
