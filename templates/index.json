@@ -154,11 +154,11 @@
         "spot_1": {
           "type": "collection_item",
           "settings": {
-            "collection": "women",
-            "custom_image": "shopify://shop_images/Screenshot_2026-10-30_021437.png",
-            "custom_eyebrow": "Daily Actives & Hydration",
-            "custom_title": "Women's Beauty & Skincare",
-            "custom_subtitle": "Targeted serums and barrier-supportive moisturizers designed for luminous skin.",
+            "collection": "face-serum",
+            "custom_image": "shopify://shop_images/face-serums.webp",
+            "custom_eyebrow": "",
+            "custom_title": "Face Serum",
+            "custom_subtitle": "Explore our curated selection of potent face serums formulated to brighten, hydrate, and restore skin barrier health.",
             "custom_link": ""
           }
         },
@@ -200,6 +200,7 @@
     },
     "section_f_combo_deals": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "eyebrow": "Curated Routine Sets",
         "heading": "Value Combo Deals",
