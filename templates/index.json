@@ -82,7 +82,7 @@
         "cat_men": {
           "type": "collection_item",
           "settings": {
-            "collection": "men",
+            "collection": "hair",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Men",
             "custom_subtitle": "Essential grooming, face wash & hydration.",
