@@ -24,7 +24,7 @@
 
     <!-- 25 Brand Directory Grid (Always shows 25 slots, uses uploaded block data when available) -->
     <div id="FullBrandsGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-      {%- for i in (1..40) -%}
+      {%- for i in (1..50) -%}
         {%- assign block_index = i | minus: 1 -%}
         {%- assign current_block = section.blocks[block_index] -%}
         {%- assign num_padded = i | prepend: '0' | slice: -2, 2 -%}
@@ -73,7 +73,7 @@
       const searchInput = document.getElementById('BrandSearchInput');
       const cards = document.querySelectorAll('[data-brand-card]');
       const viewBtns = document.querySelectorAll('[data-view-btn]');
-      let currentLimit = 40;
+      let currentLimit = 50;
 
       // Filter by search query
       searchInput?.addEventListener('input', (e) => {
