@@ -1,0 +1,87 @@
+<section class="py-12 sm:py-16 bg-[#FAF8F8] min-h-[70vh]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Page Header -->
+    <div class="text-center mb-12 sm:mb-16">
+      <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C62828]">
+        {{ section.settings.eyebrow | default: 'Curated Selection' }}
+      </span>
+      <h1 class="font-editorial text-3xl sm:text-4xl font-semibold text-[#222222] mt-2">
+        {{ page.title | escape }}
+      </h1>
+      {%- if page.content != blank -%}
+        <div class="mt-4 text-sm text-neutral-600 max-w-2xl mx-auto leading-relaxed">
+          {{ page.content }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Grouped Products by Collection -->
+    <div class="space-y-16 sm:space-y-20">
+      {%- assign collection_count = 0 -%}
+      
+      {%- for collection in collections -%}
+        {%- comment -%} Skip the default frontpage collection and any empty collections {%- endcomment -%}
+        {%- if collection.handle != 'frontpage' and collection.all_products_count > 0 -%}
+          {%- assign collection_count = collection_count | plus: 1 -%}
+          
+          <div class="collection-product-row">
+            <!-- Row Header -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 border-b border-[#EAE4E4] pb-4">
+              <div>
+                <h2 class="font-editorial text-2xl sm:text-3xl font-semibold text-[#222222]">
+                  {{ collection.title }}
+                </h2>
+                {%- if collection.description != blank -%}
+                  <p class="text-xs text-neutral-500 mt-1 max-w-2xl line-clamp-1">{{ collection.description | strip_html }}</p>
+                {%- endif -%}
+              </div>
+              
+              <a href="{{ collection.url }}" class="shrink-0 text-xs font-bold uppercase tracking-wider text-[#C62828] hover:bg-[#C62828] hover:text-white border border-[#C62828] px-4 py-2 rounded-sm transition-colors">
+                View All {{ collection.title }} &rarr;
+              </a>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
+              {%- for product in collection.products limit: section.settings.products_limit -%}
+                {% render 'card-product', product: product %}
+              {%- endfor -%}
+            </div>
+          </div>
+          
+        {%- endif -%}
+      {%- endfor -%}
+      
+      {%- if collection_count == 0 -%}
+        <div class="text-center py-12 bg-white border border-[#EAE4E4] rounded-sm">
+          <p class="text-sm font-medium text-neutral-500">No active collections found. Add products to your collections to see them here.</p>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categorized Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Curated Selection"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "label": "Products to show per category",
+      "default": 4
+    }
+  ]
+}
+{% endschema %}
