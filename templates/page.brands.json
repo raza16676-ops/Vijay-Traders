@@ -219,8 +219,9 @@
         "brand_LqEeCC": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_image": "shopify://shop_images/images_d1db0c31-c249-4d2b-8e21-465981864fdd.png",
+            "brand_name": "Nivea",
+            "brand_link": "shopify://collections/nivea"
           }
         }
       },
