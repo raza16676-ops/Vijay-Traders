@@ -51,8 +51,8 @@
         "brand_GtdeVB": {
           "type": "brand",
           "settings": {
-            "brand_name": "",
-            "brand_link": ""
+            "brand_name": "Chemist At Play",
+            "brand_link": "shopify://collections/chemist-at-play"
           }
         },
         "brand_eYxYEg": {
