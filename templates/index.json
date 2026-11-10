@@ -92,17 +92,19 @@
         "cat_sun": {
           "type": "collection_item",
           "settings": {
-            "collection": "sun-protection",
+            "collection": "sunscreen",
+            "custom_image": "shopify://shop_images/AdobeStock_613418555.jpg",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Sun Protection",
             "custom_subtitle": "Broad-spectrum UV defense with zero white cast.",
-            "custom_link": ""
+            "custom_link": "shopify://collections/sunscreen"
           }
         },
         "cat_baby": {
           "type": "collection_item",
           "settings": {
-            "collection": "mother-and-baby",
+            "collection": "baby-skincare",
+            "custom_image": "shopify://shop_images/post-3614-what-makes-korean-baby-skincare-differen-hero.webp",
             "custom_eyebrow": "Targeted Routine",
             "custom_title": "Mother & Baby",
             "custom_subtitle": "Gentle, fragrance-free care for delicate skin.",
