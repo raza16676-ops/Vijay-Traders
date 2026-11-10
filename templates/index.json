@@ -53,6 +53,19 @@
       ],
       "settings": {}
     },
+    "section_c_bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "eyebrow": "Most Requested",
+        "heading": "Best Sellers",
+        "subheading": "Everyday formulations loved for visible results and effortless wear.",
+        "collection": "",
+        "layout_mode": "standard_grid",
+        "products_to_show": 4,
+        "use_subtle_bg": false,
+        "view_all_label": "View All Best Sellers"
+      }
+    },
     "section_b_categories": {
       "type": "collection-list",
       "blocks": {
@@ -135,19 +148,6 @@
         "view_all_link": ""
       }
     },
-    "section_c_bestsellers": {
-      "type": "featured-collection",
-      "settings": {
-        "eyebrow": "Most Requested",
-        "heading": "Best Sellers",
-        "subheading": "Everyday formulations loved for visible results and effortless wear.",
-        "collection": "",
-        "layout_mode": "standard_grid",
-        "products_to_show": 4,
-        "use_subtle_bg": false,
-        "view_all_label": "View All Best Sellers"
-      }
-    },
     "section_d_featured_collections": {
       "type": "collection-list",
       "blocks": {
@@ -225,8 +225,8 @@
   },
   "order": [
     "section_a_hero",
-    "section_b_categories",
     "section_c_bestsellers",
+    "section_b_categories",
     "section_d_featured_collections",
     "section_f_combo_deals",
     "section_g_promo_banner"
