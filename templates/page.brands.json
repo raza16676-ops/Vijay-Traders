@@ -215,6 +215,13 @@
             "brand_name": "",
             "brand_link": "shopify://collections/minimalist"
           }
+        },
+        "brand_LqEeCC": {
+          "type": "brand",
+          "settings": {
+            "brand_name": "",
+            "brand_link": ""
+          }
         }
       },
       "block_order": [
@@ -242,7 +249,8 @@
         "brand_cQCFbt",
         "brand_cmBQcn",
         "brand_fyXFwB",
-        "brand_eUPY3w"
+        "brand_eUPY3w",
+        "brand_LqEeCC"
       ],
       "settings": {}
     }
